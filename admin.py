@@ -17,10 +17,6 @@ admin = Tk()
 admin.title("Admin")
 admin.minsize(width=400,height=400)
 admin.geometry("1000x800")
-#creating menubar
-menubar = Menu(admin)
-
-
 
 Canvas1 = Canvas(admin)
 Canvas1.config(bg="pink")
@@ -140,6 +136,5 @@ lb4.place(relx=0.55,rely=0.65, relwidth=0.4, relheight=0.2)
 quitBtn = Button(admin,text="Quit",bg='#f7f1e3', fg='black', command=admin.destroy)
 quitBtn.place(relx=0.12,rely=0.88, relwidth=0.18,relheight=0.08)
 
-#display Menu
-admin.config(menu = menubar)
+
 admin.mainloop()
