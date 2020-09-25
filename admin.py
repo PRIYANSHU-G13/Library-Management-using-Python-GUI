@@ -47,6 +47,33 @@ labelFrame = Frame(admin,bg='black')
 labelFrame.place(relx=0.1,rely=0.4,relwidth=0.8,relheight=0.4)
 
 # Manage Students
+def manage_students():
+    admin.destroy()
+    win1=Tk()
+    win1.title('Manage Students')
+    win1.geometry('400x350')
+
+    Canvas1 = Canvas(win1)
+    Canvas1.config(bg='#7d7d7d')
+    Canvas1.pack(expand=True,fill=BOTH)
+
+    headingFrame = Frame(win1,bg="#FFBB00",bd=2)
+    headingFrame.place(relx=0.2,rely=0.1,relwidth=0.6,relheight=0.08)
+
+    headingLabel = Label(headingFrame, text="Manage Students", bg='black', fg='white', font=('Courier',15))
+    headingLabel.place(relx=0,rely=0, relwidth=1, relheight=1)
+
+    labelFrame = Frame(win1,bg='black')
+    labelFrame.place(relx=0.1,rely=0.4,relwidth=0.8,relheight=0.5)
+
+    ms1=Button(labelFrame,text="View students",bg='black',fg='white')
+    ms1.place(relx=0.1,rely=0.1,relwidth=0.35,relheight=0.15)
+
+    ms2=Button(labelFrame,text="Add Books",bg='black',fg='white')
+    ms2.place(relx=0.55,rely=0.1,relwidth=0.35,relheight=0.15)
+    quitBtn = Button(win1,text="Quit",bg='#f7f1e3', fg='black', command=win1.destroy)
+    quitBtn.place(relx=0.12,rely=0.9, relwidth=0.88,relheight=0.08)
+    
 lb1 = Button(labelFrame,text="Manage Students", bg='black', fg='white')
 lb1.place(relx=0.05,rely=0.25, relwidth=0.4, relheight=0.2)
 
