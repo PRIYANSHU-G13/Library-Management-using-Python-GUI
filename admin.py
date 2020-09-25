@@ -2,10 +2,13 @@ from tkinter import *
 from PIL import ImageTk,Image
 import pymysql
 from tkinter import messagebox
-import webbrowser
+'''from AddBook import *
+from DeleteBook import *
+from ViewBooks import *
+from IssueBook import *'''
 
-mypass = "XXXX" #use your own password
-mydatabase="library" #The database name
+mypass = "ammureddy" #use your own password
+mydatabase="emp" #The database name
 con = pymysql.connect (host="localhost",user="root",password=mypass,database=mydatabase)
 #root is the username here
 cur = con.cursor() #cur -> cursor
@@ -23,11 +26,6 @@ Canvas1 = Canvas(admin)
 Canvas1.config(bg="pink")
 Canvas1.pack(expand=True,fill=BOTH)
 
-'''def SearchStudents():
-    global search_entry
-    search = str(search_entry.get())'''
-
-
 header_admin= Label(admin,text='ADMIN',fg='black',bg='#7d7d7d')
 header_admin.place(relx=0.65,rely=0.02,relwidth=0.1,relheight=0.05)
 
@@ -40,86 +38,58 @@ headingFrame1.place(relx=0.2,rely=0.1,relwidth=0.6,relheight=0.08)
 headingLabel = Label(headingFrame1, text="Welcome ADMIN", bg='black', fg='white', font=('Courier',15))
 headingLabel.place(relx=0,rely=0, relwidth=1, relheight=1)
 
-# search entry
-search_entry=Entry(admin)
-search_entry.insert(0,'Search Students/Books')
-search_entry.place(relx=0.11,rely=0.3, relwidth=0.45, relheight=0.08)
-
 # Search Students
-sr1 = Button(admin,text="Search Students",bg='#7d7d7d',fg='black')#,command=SearchStudents)
-sr1.place(relx=0.57,rely=0.3, relwidth=0.16, relheight=0.08)
+sr1 = Button(admin,text="Search Students",bg='#7d7d7d',fg='black')
+sr1.place(relx=0.11,rely=0.3, relwidth=0.35, relheight=0.08)
 
 # Search books
-sr2 = Button(admin,text="Search Books",bg='#7d7d7d',fg='black')#,command=SearchBooks)
-sr2.place(relx=0.74,rely=0.3, relwidth=0.16, relheight=0.08)
+sr2 = Button(admin,text="Search Books",bg='#7d7d7d',fg='black')
+sr2.place(relx=0.57,rely=0.3, relwidth=0.35, relheight=0.08)
 
 labelFrame = Frame(admin,bg='black')
 labelFrame.place(relx=0.1,rely=0.4,relwidth=0.8,relheight=0.4)
 
 # Manage Students
-lb1 = Button(labelFrame,text="Manage Students", bg='black', fg='white')
-lb1.place(relx=0.05,rely=0.25, relwidth=0.4, relheight=0.2)
-
-# Manage Books
-def manage():
+def manage_students():
     admin.destroy()
-    root=Tk()
-    root.title('Manage Books')
-    root.geometry('600x450')
+    win1=Tk()
+    win1.title('Manage Students')
+    win1.geometry('400x350')
 
-    Canvas1 = Canvas(root)
+    Canvas1 = Canvas(win1)
     Canvas1.config(bg='#7d7d7d')
     Canvas1.pack(expand=True,fill=BOTH)
 
-    headingFrame = Frame(root,bg="#FFBB00",bd=2)
-    headingFrame.place(relx=0.3,rely=0.1,relwidth=0.4,relheight=0.08)
+    headingFrame = Frame(win1,bg="#FFBB00",bd=2)
+    headingFrame.place(relx=0.2,rely=0.1,relwidth=0.6,relheight=0.08)
 
-    headingLabel = Label(headingFrame, text="Manage Books", bg='black', fg='white', font=('Courier',15))
+    headingLabel = Label(headingFrame, text="Manage Students", bg='black', fg='white', font=('Courier',15))
     headingLabel.place(relx=0,rely=0, relwidth=1, relheight=1)
 
-    labelFrame = Frame(root,bg='black')
-    labelFrame.place(relx=0.1,rely=0.25,relwidth=0.8,relheight=0.5)
+    labelFrame = Frame(win1,bg='black')
+    labelFrame.place(relx=0.1,rely=0.4,relwidth=0.8,relheight=0.5)
 
-    mb1=Button(labelFrame,text="View Library",bg='black',fg='white')
-    mb1.place(relx=0.1,rely=0.1,relwidth=0.35,relheight=0.15)
+    ms1=Button(labelFrame,text="View students",bg='black',fg='white')
+    ms1.place(relx=0.1,rely=0.1,relwidth=0.35,relheight=0.15)
 
-    mb2=Button(labelFrame,text="Issued Books",bg='black',fg='white')
-    mb2.place(relx=0.55,rely=0.1,relwidth=0.35,relheight=0.15)
+    ms2=Button(labelFrame,text="Add Books",bg='black',fg='white')
+    ms2.place(relx=0.55,rely=0.1,relwidth=0.35,relheight=0.15)
+    quitBtn = Button(win1,text="Quit",bg='#f7f1e3', fg='black', command=win1.destroy)
+    quitBtn.place(relx=0.12,rely=0.9, relwidth=0.88,relheight=0.08)
 
-    mb3=Button(labelFrame,text="Add Existing Book",bg='black',fg='white')
-    mb3.place(relx=0.1,rely=0.35,relwidth=0.35,relheight=0.15)
-
-    mb4=Button(labelFrame,text="Add New Book",bg='black',fg='white')
-    mb4.place(relx=0.55,rely=0.35,relwidth=0.35,relheight=0.15)
-
-    mb5=Button(labelFrame,text="Add Book-Details",bg='black',fg='white')
-    mb5.place(relx=0.1,rely=0.6,relwidth=0.35,relheight=0.15)
-
-    mb6=Button(labelFrame,text='Delete Book',bg='black',fg='white')
-    mb6.place(relx=0.55,rely=0.6,relwidth=0.35,relheight=0.15)
-
-    back=Button(root,text="Go to start_page",bg='#f7f1e3',fg="black")
-    back.place(relx=0.55,rely=0.85,relwidth=0.25,relheight=0.08)
-
-    quitBtn = Button(root,text="Quit",bg='#f7f1e3', fg='black', command=root.destroy)
-    quitBtn.place(relx=0.2,rely=0.85, relwidth=0.18,relheight=0.08)
+lb1 = Button(labelFrame,text="Manage Students", bg='black', fg='white',command=manage_students)
+lb1.place(relx=0.05,rely=0.25, relwidth=0.4, relheight=0.2)
 
 
-
-lb2 = Button(labelFrame,text="Manage books", bg='black', fg='white',command=manage)
+# Manage Books
+lb2 = Button(labelFrame,text="Manage books", bg='black', fg='white')
 lb2.place(relx=0.55,rely=0.25, relwidth=0.4, relheight=0.2)
-
-
-# Pending files
-lb3 = Button(labelFrame,text="Pending Files", bg='black', fg='white')
-lb3.place(relx=0.05,rely=0.65, relwidth=0.4, relheight=0.2)
-
-# Query/Feedback
+#pending files
 def view():
     admin.destroy()
-    booktable="Books"#give your table name of books
+    booktable="emp_2019bcs00101"#give your table name of books
     root1=Tk()
-    root1.title('Query/Feedback')
+    root1.title('Pending Files')
     root1.geometry('500x480')
 
     Canvas1 = Canvas(root1)
@@ -129,19 +99,25 @@ def view():
     headingFrame = Frame(root1,bg="#FFBB00",bd=2)
     headingFrame.place(relx=0.2,rely=0.1,relwidth=0.6,relheight=0.08)
 
-    headingLabel = Label(headingFrame, text="Query/Feedback", bg='black', fg='white', font=('Courier',15))
+    headingLabel = Label(headingFrame, text="Pending Files", bg='black', fg='white', font=('Courier',15))
     headingLabel.place(relx=0,rely=0, relwidth=1, relheight=1)
 
     labelFrame = Frame(root1,bg='black')
     labelFrame.place(relx=0.1,rely=0.25,relwidth=0.8,relheight=0.6)
 
-    back=Button(root1,text="Go to start_page",bg='#f7f1e3',fg="black")
-    back.place(relx=0.55,rely=0.9,relwidth=0.25,relheight=0.08)
+
+
 
     quitBtn = Button(root1,text="Quit",bg='#f7f1e3', fg='black', command=root1.destroy)
     quitBtn.place(relx=0.2,rely=0.9, relwidth=0.18,relheight=0.08)
 
-lb4 = Button(labelFrame,text="Query/Feedback", bg='black', fg='white',command=view)
+lb3 = Button(labelFrame,text="Pending Files", bg='black', fg='white',command=view )
+lb3.place(relx=0.05,rely=0.65, relwidth=0.4, relheight=0.2)
+
+
+# Query/Feedback
+
+lb4 = Button(labelFrame,text="Query/Feedback", bg='black', fg='white')
 lb4.place(relx=0.55,rely=0.65, relwidth=0.4, relheight=0.2)
 
 quitBtn = Button(admin,text="Quit",bg='#f7f1e3', fg='black', command=admin.destroy)
