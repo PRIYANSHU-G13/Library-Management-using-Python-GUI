@@ -117,7 +117,7 @@ lb3.place(relx=0.05,rely=0.65, relwidth=0.4, relheight=0.2)
 # Query/Feedback
 def view():
     admin.destroy()
-    booktable="emp_2019bcs0032"
+    booktable="Books"#give your table name of books
     root1=Tk()
     root1.title('Query/Feedback')
     root1.geometry('500x480')
