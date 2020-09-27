@@ -88,8 +88,7 @@ menubar.add_cascade(label='Qwery/Feedback',menu=lb4)
 lb4.add_command(label='Feedback',command=None)
 lb4.add_command(label='Query',command=None)
 
-labelFrame = Frame(admin,bg='black')
-labelFrame.place(relx=0.04,rely=0.25,relwidth=0.92,relheight=0.6)
+
 
 quitBtn = Button(admin,text="Quit",bg='#f7f1e3', fg='black', command=admin.destroy)
 quitBtn.place(relx=0.12,rely=0.9, relwidth=0.18,relheight=0.06)
