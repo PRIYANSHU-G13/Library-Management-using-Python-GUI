@@ -4,8 +4,8 @@ import pymysql
 from tkinter import messagebox
 import webbrowser
 
-mypass = "XXXX" #use your own password
-mydatabase="library" #The database name
+'''mypass = "XXXX" #use your own password
+mydatabase="library" #The database name'''
 con = pymysql.connect (host="localhost",user="root",password=mypass,database=mydatabase)
 #root is the username here
 cur = con.cursor() #cur -> cursor
@@ -56,7 +56,7 @@ sr2.place(relx=0.74,rely=0.3, relwidth=0.16, relheight=0.08)
 labelFrame = Frame(admin,bg='black')
 labelFrame.place(relx=0.1,rely=0.4,relwidth=0.8,relheight=0.4)
 
-# Manage Students
+'''# Manage Students
 def manage_students():
     admin.destroy()
     win1=Tk()
@@ -169,7 +169,7 @@ def view():
     quitBtn.place(relx=0.2,rely=0.9, relwidth=0.18,relheight=0.08)
 
 lb4 = Button(labelFrame,text="Query/Feedback", bg='black', fg='white',command=view)
-lb4.place(relx=0.55,rely=0.65, relwidth=0.4, relheight=0.2)
+lb4.place(relx=0.55,rely=0.65, relwidth=0.4, relheight=0.2)'''
 
 quitBtn = Button(admin,text="Quit",bg='#f7f1e3', fg='black', command=admin.destroy)
 quitBtn.place(relx=0.12,rely=0.88, relwidth=0.18,relheight=0.08)
