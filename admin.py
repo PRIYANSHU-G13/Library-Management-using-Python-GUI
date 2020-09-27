@@ -13,7 +13,7 @@ cur = con.cursor() #cur -> cursor
 admin = Tk()
 admin.title("Admin")
 admin.minsize(width=400,height=400)
-#admin.geometry("800x600")
+admin.geometry("1000X800")
 #creating menubar
 menubar = Menu(admin)
 
