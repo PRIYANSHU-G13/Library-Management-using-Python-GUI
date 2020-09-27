@@ -21,11 +21,11 @@ menubar = Menu(admin)
 
 Canvas1 = Canvas(admin)
 Canvas1.config(bg="pink")
-search = str(search_entry.get())'''
 Canvas1.pack(expand=True,fill=BOTH)
 
 '''def SearchStudents():
     global search_entry
+    search = str(search_entry.get())'''
 
 
 header_admin= Label(admin,text='ADMIN',fg='black',bg='#7d7d7d')
