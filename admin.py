@@ -4,8 +4,8 @@ import pymysql
 from tkinter import messagebox
 import webbrowser
 
-mypass = "root@0035" #use your own password
-mydatabase="lab2_dml" #The database name
+mypass = "XXXX" #use your own password
+mydatabase="library" #The database name
 con = pymysql.connect (host="localhost",user="root",password=mypass,database=mydatabase)
 #root is the username here
 cur = con.cursor() #cur -> cursor
@@ -13,7 +13,7 @@ cur = con.cursor() #cur -> cursor
 admin = Tk()
 admin.title("Admin")
 admin.minsize(width=400,height=400)
-admin.geometry("800x600")
+#admin.geometry("800x600")
 #creating menubar
 menubar = Menu(admin)
 
