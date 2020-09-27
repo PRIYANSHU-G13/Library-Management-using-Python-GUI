@@ -94,4 +94,5 @@ labelFrame.place(relx=0.04,rely=0.25,relwidth=0.92,relheight=0.6)
 quitBtn = Button(admin,text="Quit",bg='#f7f1e3', fg='black', command=admin.destroy)
 quitBtn.place(relx=0.12,rely=0.9, relwidth=0.18,relheight=0.06)
 
+
 admin.mainloop()
