@@ -56,6 +56,7 @@ sr2.place(relx=0.80,rely=0.15, relwidth=0.155, relheight=0.06)
 labelFrame = Frame(admin,bg='black')
 labelFrame.place(relx=0.04,rely=0.25,relwidth=0.92,relheight=0.6)
 
+
 # Manage Students
 
 lb1 = Menu(menubar,tearoff=0,bg='black', fg='white')
