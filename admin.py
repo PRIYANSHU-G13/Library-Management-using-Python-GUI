@@ -31,7 +31,7 @@ Canvas1.pack(expand=True,fill=BOTH)
 header_admin= Label(admin,text='ADMIN',fg='black',bg='#7d7d7d')
 header_admin.place(relx=0.65,rely=0.09,relwidth=0.1,relheight=0.05)
 
-header_username=Button(admin,text='USERNSME',fg='black')
+header_username=Button(admin,text='USERNAME',fg='black')
 header_username.place(relx=0.76,rely=0.09,relwidth=0.2,relheight=0.05)
 
 headingFrame1 = Frame(admin,bg="#FFBB00",bd=2)
