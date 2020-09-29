@@ -7,17 +7,17 @@ import mysql.connector
 con = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="XXXX",#Replace XXXX with your MySQL password
+    password="Kathyu@0508",#Replace XXXX with your MySQL password
     database="Library")
-        '''Create this database(Library) and add the student table as:
-           create table Students(Fullname varchar(30) NOT NULL,Username varchar(15) NOT NULL,
-           Email varchar(50) NOT NULL,Password varchar(20) NOT NULL,Contact int(10) NOT NULL,
-           Age int(3) NOT NULL,Batch int(4) NOT NULL,Course varchar(20) NOT NULL,PRIMARY KEY (Username));'''
+'''Create this database(Library) and add the student table as:
+create table Students(Fullname varchar(30) NOT NULL,Username varchar(15) NOT NULL,
+Email varchar(50) NOT NULL,Password varchar(20) NOT NULL,Contact int(10) NOT NULL,
+Age int(3) NOT NULL,Batch int(4) NOT NULL,Course varchar(20) NOT NULL,PRIMARY KEY (Username));'''
 
-        '''books table as:
-           create table books(B_ID VARCHAR(10) NOT NULL, B_NAME VARCHAR(20) NOT NULL, AUTHOR VARCHAR(30) NOT NULL,
-           S_ID VARCHAR(10) NOT NULL, S_NAME VARCHAR(20) NOT NULL, C_NAME VARCHAR(20) NOT NULL,
-           PRIMARY KEY (B_ID));'''
+'''books table as:
+create table books(B_ID VARCHAR(10) NOT NULL, B_NAME VARCHAR(20) NOT NULL, AUTHOR VARCHAR(30) NOT NULL,
+S_ID VARCHAR(10) NOT NULL, S_NAME VARCHAR(20) NOT NULL, C_NAME VARCHAR(20) NOT NULL,
+PRIMARY KEY (B_ID));'''
 
 cur = con.cursor()
 
@@ -242,41 +242,45 @@ def add_existing():
 def add_new():
     for widget in labelFrame.winfo_children():
         widget.destroy()
-    B_ID = Label(labelFrame,text="BOOK_ID",fg="black",bg="white")
-    B_ID.place(relx=0.02,rely=0.12,relwidth=0.3,relheight=0.08)
 
-    B_NAME = Label(labelFrame,text="BOOK_NAME",fg="black",bg="white")
-    B_NAME.place(relx=0.02,rely=0.22,relwidth=0.3,relheight=0.08)
+    but1 = Button(labelFrame,text="ADD DETAILS",font="bold",fg="black",bg="white")
+    but1.place(relx=0.05,rely=0.12,relwidth=0.22,relheight=0.08)
 
-    AUTHOR = Label(labelFrame,text="AUTHOR",fg="black",bg="white")
-    AUTHOR.place(relx=0.02,rely=0.32,relwidth=0.3,relheight=0.08)
+    B_ID = Label(labelFrame,text="BOOK_ID",fg="white",bg="black")
+    B_ID.place(relx=0.02,rely=0.22,relwidth=0.3,relheight=0.08)
 
-    S_ID = Label(labelFrame,text="STREAM_ID",fg="black",bg="white")
-    S_ID.place(relx=0.02,rely=0.42,relwidth=0.3,relheight=0.08)
+    B_NAME = Label(labelFrame,text="BOOK_NAME",fg="white",bg="black")
+    B_NAME.place(relx=0.02,rely=0.32,relwidth=0.3,relheight=0.08)
 
-    S_NAME = Label(labelFrame,text="STREAM_NAME",fg="black",bg="white")
-    S_NAME.place(relx=0.02,rely=0.52,relwidth=0.3,relheight=0.08)
+    AUTHOR = Label(labelFrame,text="AUTHOR",fg="white",bg="black")
+    AUTHOR.place(relx=0.02,rely=0.42,relwidth=0.3,relheight=0.08)
 
-    C_NAME = Label(labelFrame,text="CATEGORY",fg="black",bg="white")
-    C_NAME.place(relx=0.02,rely=0.62,relwidth=0.3,relheight=0.08)
+    S_ID = Label(labelFrame,text="STREAM_ID",fg="white",bg="black")
+    S_ID.place(relx=0.02,rely=0.52,relwidth=0.3,relheight=0.08)
+
+    S_NAME = Label(labelFrame,text="STREAM_NAME",fg="white",bg="black")
+    S_NAME.place(relx=0.02,rely=0.62,relwidth=0.3,relheight=0.08)
+
+    C_NAME = Label(labelFrame,text="CATEGORY",fg="white",bg="black")
+    C_NAME.place(relx=0.02,rely=0.72,relwidth=0.3,relheight=0.08)
 
     e_b_id = Entry(labelFrame)
-    e_b_id.place(relx=0.42,rely=0.12,relwidth=0.3,relheight=0.08)
+    e_b_id.place(relx=0.42,rely=0.22,relwidth=0.3,relheight=0.08)
 
     e_b_name = Entry(labelFrame)
-    e_b_name.place(relx=0.42,rely=0.22,relwidth=0.3,relheight=0.08)
+    e_b_name.place(relx=0.42,rely=0.32,relwidth=0.3,relheight=0.08)
 
     e_author = Entry(labelFrame)
-    e_author.place(relx=0.42,rely=0.32,relwidth=0.3,relheight=0.08)
+    e_author.place(relx=0.42,rely=0.42,relwidth=0.3,relheight=0.08)
 
     e_s_id = Entry(labelFrame)
-    e_s_id.place(relx=0.42,rely=0.42,relwidth=0.3,relheight=0.08)
+    e_s_id.place(relx=0.42,rely=0.52,relwidth=0.3,relheight=0.08)
 
     e_s_name = Entry(labelFrame)
-    e_s_name.place(relx=0.42,rely=0.52,relwidth=0.3,relheight=0.08)
+    e_s_name.place(relx=0.42,rely=0.62,relwidth=0.3,relheight=0.08)
 
     e_c_name = Entry(labelFrame)
-    e_c_name.place(relx=0.42,rely=0.62,relwidth=0.3,relheight=0.08)
+    e_c_name.place(relx=0.42,rely=0.72,relwidth=0.3,relheight=0.08)
 
 
     def add():
@@ -288,19 +292,25 @@ def add_new():
         C_NAME = e_c_name.get()
 
         if(B_ID=="" or B_NAME=="" or AUTHOR=="" or S_ID=="" or S_NAME=="" or C_NAME==""):
-            messagebox.showinfo("Insert Status", "All fields are required!")
+            messagebox.showinfo("Invalid Detalis", "All fields are required!")
+        if(B_ID.isalnum()):
+            pass
         else:
-            cur.execute("insert into books values('"+ B_ID +"','"+ B_NAME +"','"+ AUTHOR +"','"+ S_ID +"','"+ S_NAME +"','"+ C_NAME +"')")
-            cur.execute("commit")
+            messagebox.showinfo("Invalid Details","BOOK_ID should be alphanumeric!")
+        if(S_ID.isalnum()):
+            pass
+        else:
+            messagebox.showinfo("Invalid Details","STREAM_ID should be alphanumeric!")
+        cur.execute("insert into books values('"+ B_ID +"','"+ B_NAME +"','"+ AUTHOR +"','"+ S_ID +"','"+ S_NAME +"','"+ C_NAME +"')")
+        cur.execute("commit")
+        messagebox.showinfo("Insert Status","Successfully inserted into database")
 
-            e_b_id.delete(0, 'end')
-            e_b_name.delete(0, 'end')
-            e_author.delete(0, 'end')
-            e_s_id.delete(0, 'end')
-            e_s_name.delete(0, 'end')
-            e_c_name.delete(0, 'end')
-
-            messagebox.showinfo("Insert Status","Successfully inserted into database")
+        e_b_id.delete(0, 'end')
+        e_b_name.delete(0, 'end')
+        e_author.delete(0, 'end')
+        e_s_id.delete(0, 'end')
+        e_s_name.delete(0, 'end')
+        e_c_name.delete(0, 'end')
 
     ADD = Button(labelFrame,text="ADD BOOK",fg="black",bg="#7d7d7d",command=add)
     ADD.place(relx=0.62,rely=0.85,relwidth=0.2,relheight=0.08)
@@ -310,17 +320,21 @@ def add_new():
 def delete():
     for widget in labelFrame.winfo_children():
         widget.destroy()
-    B_ID = Label(labelFrame,text="BOOK_ID",fg="black",bg="white")
-    B_ID.place(relx=0.1,rely=0.12,relwidth=0.3,relheight=0.08)
 
-    B_NAME = Label(labelFrame,text="BOOK_NAME",fg="black",bg="white")
-    B_NAME.place(relx=0.1,rely=0.22,relwidth=0.3,relheight=0.08)
+    but1 = Button(labelFrame,text="ADD DETAILS",font="bold",fg="black",bg="white")
+    but1.place(relx=0.14,rely=0.12,relwidth=0.22,relheight=0.08)
+
+    B_ID = Label(labelFrame,text="BOOK_ID",fg="white",bg="black")
+    B_ID.place(relx=0.1,rely=0.32,relwidth=0.3,relheight=0.08)
+
+    B_NAME = Label(labelFrame,text="BOOK_NAME",fg="white",bg="black")
+    B_NAME.place(relx=0.1,rely=0.42,relwidth=0.3,relheight=0.08)
 
     e_b_id = Entry(labelFrame)
-    e_b_id.place(relx=0.5,rely=0.12,relwidth=0.3,relheight=0.08)
+    e_b_id.place(relx=0.5,rely=0.32,relwidth=0.3,relheight=0.08)
 
     e_b_name = Entry(labelFrame)
-    e_b_name.place(relx=0.5,rely=0.22,relwidth=0.3,relheight=0.08)
+    e_b_name.place(relx=0.5,rely=0.42,relwidth=0.3,relheight=0.08)
 
     def remove():
         B_ID = e_b_id.get()
@@ -339,8 +353,7 @@ def delete():
         messagebox.showinfo("Delete Status","Successfully deleted from database")
 
     DELETE = Button(labelFrame,text="DELETE BOOK",fg="black",bg="#7d7d7d",command=remove)
-    DELETE.place(relx=0.55,rely=0.5,relwidth=0.2,relheight=0.08)
-
+    DELETE.place(relx=0.55,rely=0.65,relwidth=0.2,relheight=0.08)
 
 # Manage Books
 
