@@ -189,7 +189,7 @@ lb1.add_command(label='Add Student',command=adds)
 lb1.add_command(label='View Students',command=views)
 lb1.add_separator()
 lb1.add_command(label='Delete Student',command=deletes)
-lb1.add_command(label='Restrict Student',command=None)
+#lb1.add_command(label='Restrict Student',command=None)
 
 
 
@@ -350,7 +350,7 @@ lb2.add_command(label='Issued Books',command=None)
 lb2.add_separator()
 lb2.add_command(label='Add Existing Book',command=add_existing)
 lb2.add_command(label='Add New Book',command=add_new)
-lb2.add_command(label='Add Book Details',command=None)
+#lb2.add_command(label='Add Book Details',command=None)
 lb2.add_command(label='Delete Book',command=delete)
 
 
