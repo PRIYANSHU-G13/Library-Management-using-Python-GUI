@@ -311,16 +311,16 @@ def delete():
     for widget in labelFrame.winfo_children():
         widget.destroy()
     B_ID = Label(labelFrame,text="BOOK_ID",fg="black",bg="white")
-    B_ID.place(relx=0.02,rely=0.12,relwidth=0.3,relheight=0.08)
+    B_ID.place(relx=0.1,rely=0.12,relwidth=0.3,relheight=0.08)
 
     B_NAME = Label(labelFrame,text="BOOK_NAME",fg="black",bg="white")
-    B_NAME.place(relx=0.02,rely=0.22,relwidth=0.3,relheight=0.08)
+    B_NAME.place(relx=0.1,rely=0.22,relwidth=0.3,relheight=0.08)
 
     e_b_id = Entry(labelFrame)
-    e_b_id.place(relx=0.42,rely=0.12,relwidth=0.3,relheight=0.08)
+    e_b_id.place(relx=0.5,rely=0.12,relwidth=0.3,relheight=0.08)
 
     e_b_name = Entry(labelFrame)
-    e_b_name.place(relx=0.42,rely=0.22,relwidth=0.3,relheight=0.08)
+    e_b_name.place(relx=0.5,rely=0.22,relwidth=0.3,relheight=0.08)
 
     def remove():
         B_ID = e_b_id.get()
@@ -339,7 +339,8 @@ def delete():
         messagebox.showinfo("Delete Status","Successfully deleted from database")
 
     DELETE = Button(labelFrame,text="DELETE BOOK",fg="black",bg="#7d7d7d",command=remove)
-    DELETE.place(relx=0.62,rely=0.85,relwidth=0.2,relheight=0.08)
+    DELETE.place(relx=0.55,rely=0.5,relwidth=0.2,relheight=0.08)
+
 
 # Manage Books
 
@@ -350,7 +351,7 @@ lb2.add_command(label='Issued Books',command=None)
 lb2.add_separator()
 lb2.add_command(label='Add Existing Book',command=add_existing)
 lb2.add_command(label='Add New Book',command=add_new)
-lb2.add_command(label='Add Book Details',command=None)
+#lb2.add_command(label='Add Book Details',command=None)
 lb2.add_command(label='Delete Book',command=delete)
 
 
