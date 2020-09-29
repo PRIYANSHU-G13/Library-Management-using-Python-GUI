@@ -6,17 +6,17 @@ import webbrowser
 import mysql.connector
 
 
-mydb = mysql.connector.connect(
+con = mysql.connector.connect(
     host="localhost",
     user="root",
     password="XXXX",#Replace XXXX with your MySQL password
     database="Library")
-        '''Create this database(Library) and add the student table as: 
-           create table Students(Fullname varchar(30) NOT NULL,Username varchar(15) NOT NULL,
-           Email varchar(50) NOT NULL,Password varchar(20) NOT NULL,Contact int(10) NOT NULL,
-           Age int(3) NOT NULL,Batch int(4) NOT NULL,Course varchar(20) NOT NULL,PRIMARY KEY (Username));'''
+        #Create this database(Library) and add the student table as:
+        #create table Students(Fullname varchar(30) NOT NULL,Username varchar(15) NOT NULL,
+        #Email varchar(50) NOT NULL,Password varchar(20) NOT NULL,Contact int(10) NOT NULL,
+        #Age int(3) NOT NULL,Batch int(4) NOT NULL,Course varchar(20) NOT NULL,PRIMARY KEY (Username));
 
-db = mydb.cursor()
+cur = con.cursor()
 
 admin = Tk()
 admin.title("Admin")
@@ -73,11 +73,10 @@ def adds():
         else:
             messagebox.showinfo("Invalid Username","Username should be Alphanumeric!")
 
-        db=mydb.cursor()
         addformula="INSERT INTO students (Fullname, Username, Email, Password, Contact, Age, Batch, Course) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
         add_student=(fname,usern,mail,passwrd,int(con),int(age),int(batch),course)
-        db.execute(addformula, add_student)
-        mydb.commit()
+        cur.execute(addformula, add_student)
+        con.commit()
         messagebox.showinfo("Student Added","Student is added successfully!")
 
 
@@ -133,11 +132,10 @@ def deletes():
         dmail=str(demail.get())
         if(delst=='' or dfname=='' or dmail==''):
             messagebox.showinfo("Can't Delete","All feilds are required!")
-        db=mydb.cursor()
-        db.execute("DELETE FROM Students WHERE Username='"+ delst +"'")
-        mydb.commit()
+        cur.execute("DELETE FROM Students WHERE Username='"+ delst +"'")
+        con.commit()
         messagebox.showinfo("Student Deleted","Student is Deleted successfully!")
-        
+
 
     details=Label(labelFrame,text="Enter Details:",bg='white',fg='black').place(relx=0.08,rely=0.06,relwidth=0.3,relheight=0.1)
     username=Label(labelFrame,text="Username",bg='black',fg='white').place(relx=0.1,rely=0.28,relwidth=0.25,relheight=0.08)
