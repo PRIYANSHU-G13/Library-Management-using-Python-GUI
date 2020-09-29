@@ -84,7 +84,7 @@ def adds():
 
 
 
-    details=Label(labelFrame,text="Add Details:",bg='white',fg='black').place(relx=0.08,rely=0.06,relwidth=0.3,relheight=0.1)
+    details=Label(labelFrame,text="Add Details:",bg='white',fg='black',font="bold").place(relx=0.08,rely=0.06,relwidth=0.3,relheight=0.1)
     fullname=Label(labelFrame,text="Full name",bg='black',fg='white').place(relx=0.1,rely=0.18,relwidth=0.25,relheight=0.08)
     username=Label(labelFrame,text="Username",bg='black',fg='white').place(relx=0.1,rely=0.28,relwidth=0.25,relheight=0.08)
     email=Label(labelFrame,text="Email Id",bg='black',fg='white').place(relx=0.1,rely=0.38,relwidth=0.25,relheight=0.08)
@@ -140,7 +140,7 @@ def deletes():
         messagebox.showinfo("Student Deleted","Student is Deleted successfully!")
 
 
-    details=Label(labelFrame,text="Enter Details:",bg='white',fg='black').place(relx=0.08,rely=0.06,relwidth=0.3,relheight=0.1)
+    details=Label(labelFrame,text="Enter Details:",bg='white',fg='black',font="bold).place(relx=0.08,rely=0.06,relwidth=0.3,relheight=0.1)
     username=Label(labelFrame,text="Username",bg='black',fg='white').place(relx=0.1,rely=0.28,relwidth=0.25,relheight=0.08)
     fullname=Label(labelFrame,text="Full name",bg='black',fg='white').place(relx=0.1,rely=0.38,relwidth=0.25,relheight=0.08)
     email=Label(labelFrame,text="Email Id",bg='black',fg='white').place(relx=0.1,rely=0.48,relwidth=0.25,relheight=0.08)
