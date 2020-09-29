@@ -12,9 +12,9 @@ con = mysql.connector.connect(
         '''Create this database(Library) and add the student table as:
            create table Students(Fullname varchar(30) NOT NULL,Username varchar(15) NOT NULL,
            Email varchar(50) NOT NULL,Password varchar(20) NOT NULL,Contact int(10) NOT NULL,
-           Age int(3) NOT NULL,Batch int(4) NOT NULL,Course varchar(20) NOT NULL,PRIMARY KEY (Username));
+           Age int(3) NOT NULL,Batch int(4) NOT NULL,Course varchar(20) NOT NULL,PRIMARY KEY (Username));'''
 
-           books table as:
+        '''books table as:
            create table books(B_ID VARCHAR(10) NOT NULL, B_NAME VARCHAR(20) NOT NULL, AUTHOR VARCHAR(30) NOT NULL,
            S_ID VARCHAR(10) NOT NULL, S_NAME VARCHAR(20) NOT NULL, C_NAME VARCHAR(20) NOT NULL,
            PRIMARY KEY (B_ID));'''
