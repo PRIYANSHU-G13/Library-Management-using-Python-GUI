@@ -19,7 +19,7 @@ con = mysql.connector.connect(
            S_ID VARCHAR(10) NOT NULL, S_NAME VARCHAR(20) NOT NULL, C_NAME VARCHAR(20) NOT NULL,
            PRIMARY KEY (B_ID));'''
 
-cur = mydb.cursor()
+cur = con.cursor()
 
 admin = Tk()
 admin.title("Admin")
