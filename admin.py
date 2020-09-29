@@ -10,8 +10,11 @@ mydb = mysql.connector.connect(
     host="localhost",
     user="root",
     password="XXXX",#Replace XXXX with your MySQL password
-    database="Library"
-)
+    database="Library")
+        '''Create this database(Library) and add the student table as: 
+           create table Students(Fullname varchar(30) NOT NULL,Username varchar(15) NOT NULL,
+           Email varchar(50) NOT NULL,Password varchar(20) NOT NULL,Contact int(10) NOT NULL,
+           Age int(3) NOT NULL,Batch int(4) NOT NULL,Course varchar(20) NOT NULL,PRIMARY KEY (Username));'''
 
 db = mydb.cursor()
 
