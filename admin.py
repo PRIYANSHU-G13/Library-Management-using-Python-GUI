@@ -221,6 +221,7 @@ def view():
     c_name.place(relx=0.82,rely=0.2,relwidth=0.14,relheight=0.06)
 
     def show():
+        ls.delete(0,'end')
         cur.execute("select * from books")
         rows=cur.fetchall()
 
