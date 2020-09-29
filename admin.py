@@ -7,7 +7,7 @@ import mysql.connector
 con = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="Kathyu@0508",#Replace XXXX with your MySQL password
+    password="XXXX",#Replace XXXX with your MySQL password
     database="Library")
 '''Create this database(Library) and add the student table as:
 create table Students(Fullname varchar(30) NOT NULL,Username varchar(15) NOT NULL,
