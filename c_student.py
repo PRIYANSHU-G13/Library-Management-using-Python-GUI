@@ -118,14 +118,14 @@ def reuqests():
     numOfRequest = 20
 
     #start
-    #listbox = Listbox(leftF, bg="yellow", relief="sunken",font=("courier",15),fg="white")
-    listbox = Listbox(leftF,relief="sunken",font=("courier",15),fg="white")
-    listbox.place(relx=0.04, rely=0,relwidth=0.92,relheight=0.9)
-    h = Scrollbar(listbox, orient = 'horizontal')
-    h.pack(side = BOTTOM, fill = X)
-    v = Scrollbar(listbox)
-    v.pack(side = RIGHT, fill = Y)
-    t = Text(listbox, wrap = NONE, xscrollcommand = h.set, yscrollcommand = v.set)  
+    listbox = Listbox(leftF, relief="sunken", font=("courier", 15),fg="white")
+    listbox.place(relx=0.5, rely=0.43,relwidth=0.92,relheight=0.85, anchor=CENTER)
+    h = Scrollbar(leftF, orient='horizontal')
+    h.place(relx=0.5, rely=0.92, anchor=S, relwidth=0.92)
+    v = Scrollbar(leftF, orient='vertical')
+    v.pack(side=RIGHT, fill=Y)
+    v.place(relx=1, rely=0.43, anchor=E, relheight=0.92)
+    t = Text(listbox, wrap=NONE, xscrollcommand=h.set, yscrollcommand=v.set)
     #end
     for i in range(numOfRequest):
         bookNameFont = tkFont.Font(family='product sans', size=13)
@@ -158,14 +158,14 @@ def mybooks():
     numOfRequest = 20
 
     #start
-    #listbox = Listbox(leftF, bg="yellow", relief="sunken",font=("courier",15),fg="white")
-    listbox = Listbox(leftF,relief="sunken",font=("courier",15),fg="white")
-    listbox.place(relx=0.04, rely=0,relwidth=0.92,relheight=0.9)
-    h = Scrollbar(listbox, orient = 'horizontal')
-    h.pack(side = BOTTOM, fill = X)
-    v = Scrollbar(listbox)
-    v.pack(side = RIGHT, fill = Y)
-    t = Text(listbox, wrap = NONE, xscrollcommand = h.set, yscrollcommand = v.set)  
+    listbox = Listbox(leftF, relief="sunken", font=("courier", 15), fg="white")
+    listbox.place(relx=0.5, rely=0.43,relwidth=0.92,relheight=0.85, anchor=CENTER)
+    h = Scrollbar(leftF, orient='horizontal')
+    h.place(relx=0.5, rely=0.92, anchor=S, relwidth=0.92)
+    v = Scrollbar(leftF, orient='vertical')
+    v.pack(side=RIGHT, fill=Y)
+    v.place(relx=1, rely=0.43, anchor=E, relheight=0.92)
+    t = Text(listbox, wrap=NONE, xscrollcommand=h.set, yscrollcommand=v.set)  
     #end
     for i in range(numOfRequest):
         bookNameFont = tkFont.Font(family='product sans', size=13)
@@ -198,14 +198,14 @@ def history():
     numOfRequest = 20
 
     #start
-    #listbox = Listbox(leftF, bg="yellow", relief="sunken",font=("courier",15),fg="white")
-    listbox = Listbox(leftF,relief="sunken",font=("courier",15),fg="white")
-    listbox.place(relx=0.04, rely=0,relwidth=0.92,relheight=0.9)
-    h = Scrollbar(listbox, orient = 'horizontal')
-    h.pack(side = BOTTOM, fill = X)
-    v = Scrollbar(listbox)
-    v.pack(side = RIGHT, fill = Y)
-    t = Text(listbox, wrap = NONE, xscrollcommand = h.set, yscrollcommand = v.set)  
+    listbox = Listbox(leftF, relief="sunken", font=("courier", 15), fg="white")
+    listbox.place(relx=0.5, rely=0.43,relwidth=0.92,relheight=0.85, anchor=CENTER)
+    h = Scrollbar(leftF, orient='horizontal')
+    h.place(relx=0.5, rely=0.92, anchor=S, relwidth=0.92)
+    v = Scrollbar(leftF, orient='vertical')
+    v.pack(side=RIGHT, fill=Y)
+    v.place(relx=1, rely=0.43, anchor=E, relheight=0.92)
+    t = Text(listbox, wrap=NONE, xscrollcommand=h.set, yscrollcommand=v.set)  
     #end
     for i in range(numOfRequest):
         bookNameFont = tkFont.Font(family='product sans', size=13)
@@ -238,14 +238,14 @@ def fine():
     numOfRequest = 20
 
     #start
-    #listbox = Listbox(leftF, bg="yellow", relief="sunken",font=("courier",15),fg="white")
-    listbox = Listbox(leftF,relief="sunken",font=("courier",15),fg="white")
-    listbox.place(relx=0.04, rely=0,relwidth=0.92,relheight=0.9)
-    h = Scrollbar(listbox, orient = 'horizontal')
-    h.pack(side = BOTTOM, fill = X)
-    v = Scrollbar(listbox)
-    v.pack(side = RIGHT, fill = Y)
-    t = Text(listbox, wrap = NONE, xscrollcommand = h.set, yscrollcommand = v.set)  
+    listbox = Listbox(leftF, relief="sunken", font=("courier", 15), fg="white")
+    listbox.place(relx=0.5, rely=0.43,relwidth=0.92,relheight=0.85, anchor=CENTER)
+    h = Scrollbar(leftF, orient='horizontal')
+    h.place(relx=0.5, rely=0.92, anchor=S, relwidth=0.92)
+    v = Scrollbar(leftF, orient='vertical')
+    v.pack(side=RIGHT, fill=Y)
+    v.place(relx=1, rely=0.43, anchor=E, relheight=0.92)
+    t = Text(listbox, wrap=NONE, xscrollcommand=h.set, yscrollcommand=v.set) 
     #end
     for i in range(numOfRequest):
         bookNameFont = tkFont.Font(family='product sans', size=13)
