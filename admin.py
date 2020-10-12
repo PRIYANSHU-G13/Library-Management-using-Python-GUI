@@ -7,7 +7,7 @@ import mysql.connector
 con = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="XXXX",#Replace XXXX with your MySQL password
+    password="root@0035",#Replace XXXX with your MySQL password
     database="Library")
         #'''Create this database(Library) and add the student table as:
          #  create table Students(Fullname varchar(30) NOT NULL,Username varchar(15) NOT NULL,
@@ -134,7 +134,7 @@ def views():
     for widget in labelFrame.winfo_children():
         widget.destroy()
 
-    lboxs = Listbox(labelFrame, bg="black", relief="sunken",font=("courier",15),fg="white")
+    lboxs = Listbox(labelFrame, bg="white", relief="sunken",font=("courier",15),fg="white")
     lboxs.place(relx=0.04, rely=0.3,relwidth=0.92,relheight=0.65)
 
     Name = Label(labelFrame,text="NAME",bg="white",fg="black")
@@ -157,13 +157,27 @@ def views():
 
     def show():
         lboxs.delete(0,'end')
+        #start
+        h = Scrollbar(lboxs, orient = 'horizontal')
+        h.pack(side = BOTTOM, fill = X)
+        v = Scrollbar(lboxs)
+        v.pack(side = RIGHT, fill = Y)
+        t = Text(lboxs, width = 30, height = 30, wrap = NONE, xscrollcommand = h.set, yscrollcommand = v.set)
+        #end
 
         cur.execute("select * from students")
         rows=cur.fetchall()
 
         for row in rows:
-            insertdata = "%-12.5s%-10s%-20s%-10s%-10s%-12.5s"%(row[0],row[1],row[2],row[6],row[7],'Message')
-            lboxs.insert(lboxs.size()+1, insertdata)
+            insertdata = "%-12.5s%-10s%-20s%-10s%-10s%-12.5s\n"%(row[0],row[1],row[2],row[6],row[7],'Message')
+            #lboxs.insert(lboxs.size()+1, insertdata)
+            t.insert(END,insertdata)
+        #start
+        t.configure(state="disabled")
+        t.pack(side=TOP, fill=X)
+        h.config(command=t.xview)
+        v.config(command=t.yview)
+        #end
 
     display = Button(labelFrame,text="CLICK TO VIEW",bg='#525b59', fg='white',command=show)
     display.place(relx=0.35,rely=0.05,relwidth=0.3,relheight=0.1)
@@ -269,13 +283,28 @@ def view():
 
     def show():
         ls.delete(0,'end')
+        #start
+        h = Scrollbar(ls, orient = 'horizontal')
+        h.pack(side = BOTTOM, fill = X)
+        v = Scrollbar(ls)
+        v.pack(side = RIGHT, fill = Y)
+        t = Text(ls, width = 30, height = 30, wrap = NONE, xscrollcommand = h.set, yscrollcommand = v.set)
+        #end
 
         cur.execute("select * from books")
         rows=cur.fetchall()
 
         for row in rows:
             insertdata = "%-10s%-15s%-15s%-10s%-12.5s%-12.5s"%(row[0],row[1],row[2],row[3],row[4],row[5])
-            ls.insert(ls.size()+1, insertdata)
+            #ls.insert(ls.size()+1, insertdata)
+            t.insert(END,insertdata)
+
+        #start
+        t.configure(state="disabled")
+        t.pack(side=TOP, fill=X)
+        h.config(command=t.xview)
+        v.config(command=t.yview)
+        #end
 
     display = Button(labelFrame,text="CLICK TO VIEW",bg='#525b59', fg='white',command=show)
     display.place(relx=0.35,rely=0.05,relwidth=0.3,relheight=0.1)

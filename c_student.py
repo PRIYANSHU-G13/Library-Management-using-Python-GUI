@@ -7,15 +7,10 @@ from PIL import ImageTk, Image
 import os
 from tkinter import messagebox
 from tkinter import ttk
-#from tkinter import *
+
 from tkinter.ttk import *
-#from tkinter import *
-#from tkinter.ttk import *
 import tkinter.font as font
-#from PIL import ImageTk, Image
-#from tkinter import *
-#from tkinter.ttk import *
-#from PIL import Image
+
 from tkinter import *
 import mysql.connector
 
@@ -34,302 +29,268 @@ win.resizable(False, False)
 topF = tkinter.Frame(win, width=1150, borderwidth=-1, height=150, bg='black')
 topF.grid(column=0, row=0, columnspan=2)
 
-leftF = tkinter.Frame(win, width=850,
-                      relief=SUNKEN, height=450, bg="white")
-leftF.grid(column=0, row=2)
+bottomF = tkinter.Frame(win, width=1150,
+                      relief=SUNKEN, height=450, bg="yellow")
+bottomF.grid(column=0, row=2)
 
-rightF = tkinter.Frame(win, borderwidth=1, relief=SUNKEN,
-                       width=300, height=450, bg="white")
-rightF.grid(column=1, row=2, rowspan=1)
+#rightF = tkinter.Frame(win, borderwidth=1, relief=SUNKEN,width=300, height=450, bg="pink")
+#rightF.grid(column=1, row=2, rowspan=1)
 
-tabF = tkinter.Frame(win, width=850, height=80, relief=SUNKEN, bg="white")
-tabF.grid(column=0, row=1)
+tabF = tkinter.Frame(win, width=1150, height=80, relief=SUNKEN, bg="red")
+tabF.grid(column=0, row=1,columnspan=2)
 
-finesF = tkinter.Frame(win, borderwidth=1, relief=SUNKEN,
-                       width=300, height=80, bg="white")
-finesF.grid(column=1, row=1, rowspan=1)
+#finesF = tkinter.Frame(win, borderwidth=1, relief=SUNKEN, width=300, height=80, bg="white")
+#finesF.grid(column=1, row=1, rowspan=1)
 
-# start of Fine frame
-
-
-# Fine ---------------------------------------------------------------------------------
-
+#start of Fine frame
 def message():
-    messagebox.showinfo("Sorry, This option is not available!",
-                        "Kindly contact to your Admin")
+    messagebox.showinfo("Sorry, This option is not available!","Kindly contact to your Admin")
 
+listbox1 = Listbox(topF,relief="sunken",font=("courier",15),bg='black')
+listbox1.place(relx=0.8, rely=0,relwidth=1,relheight=1)
 
-fineFont = tkFont.Font(family='product sans', size=12)
-user = tkinter.Label(finesF, text='User : Shivam kumar',
-                     fg="green", bg="white", font=fineFont)
+fineFont = tkFont.Font(family='product sans',size=12)
+user = tkinter.Label(listbox1, text='User : Shivam kumar', fg="green", font=fineFont)   
 user.place(relx=0, rely=0)
+Fine = tkinter.Label(listbox1, text='Fine  : 325.50', fg="red", font=fineFont)   
+Fine.place(relx=0, rely=0.25)
+pay_fine=Button(listbox1,text='Pay Fine',bg='green',fg='white', activeforeground='black', command=message, bd='3',cursor='hand2',font=fineFont)
+pay_fine.place(relx=0.125, rely=0.23)
 
-Fine = tkinter.Label(finesF, text='Fine  : 325.50',
-                     bg="white", fg="red", font=fineFont)
-Fine.place(relx=0, rely=0.33)
+#end of Fine frame
 
-pay_fine = Button(finesF, text='Pay Fine', bg='green', fg='white',
-                  activeforeground='black', command=message, bd='3', cursor='hand2', font=fineFont)
-pay_fine.place(relx=1, rely=1, anchor=SE)
-# end of Fine frame
+# Library --------------------------------------------------------------------------------------------------------------
 
-# Library -----------------------------------------------------------------------------------------------------------
-
-
-def search():
-    dic = {
-        'CSE': ['DS', 'Algorithms', 'AI', 'ML', 'DL', 'NNP'],
-        'ECE': ['Basic electronics', 'Digital electronics'],
-        'IT': ['Web development', 'IT Workshop 1', 'IT Workshop 2'],
-        'Maths': ['Disrete Mathematics', 'Linear Algebra', 'Differrential equation', 'Graph theory']
-    }
-
+def library():
+    dic={
+        'CSE':['DS','Algorithms','AI','ML','DL','NNP'],
+        'ECE':['Basic electronics','Digital electronics'],
+        'IT':['Web development','IT Workshop 1','IT Workshop 2'],
+        'Maths':['Disrete Mathematics','Linear Algebra','Differrential equation','Graph theory']
+        }
     def dropdown_fun(event):
-        # if strem.get()=="CSE":
-        catogery = ttk.Combobox(listbox, width=30)
+        #if strem.get()=="CSE":
+        catogery = ttk.Combobox(listbox,width=30)
         catogery['values'] = dic[strem.get()]
         catogery.place(relx=0.22+0.25, rely=0.5)
         catogery.current(0)
-
+            
     # Entry labels ----------------------------------------------
-    for widget in leftF.winfo_children():
+    for widget in bottomF.winfo_children():
         widget.destroy()
 
-    listbox = Listbox(leftF, relief="sunken", font=(
-        "courier", 15), fg="white", bg='light yellow')
-    listbox.place(relx=0.04, rely=0, relwidth=0.92, relheight=0.9)
+        
 
-    label3 = tkinter.Label(listbox, text="SEARCH BOOK",
-                           bg='#525b59', fg='white', font='BOLD')
-    label3.place(relx=0.35, rely=0.11, relwidth=0.3, relheight=0.1)
+    listbox = Listbox(bottomF,relief="sunken",font=("courier",15),fg="white",bg='light yellow')
+    listbox.place(relx=0.04, rely=0,relwidth=0.92,relheight=0.9)
+
+    label3 = tkinter.Label(listbox,text="SEARCH BOOK",bg='#525b59', fg='white', font='BOLD')
+    label3.place(relx=0.35,rely=0.11,relwidth=0.3,relheight=0.1)
 
     titleFont = tkFont.Font(family='product sans', size=13)
     strem1 = tkinter.Label(listbox, text='Select stream : ', bg="light yellow", width=15,
-                           borderwidth=0, font=titleFont, anchor='e').place(relx=0.04+0.25, rely=0.4)
+                              borderwidth=0, font=titleFont, anchor='e').place(relx=0.04+0.25, rely=0.4)
     catogery1 = tkinter.Label(listbox, text='Select catogery : ', bg="light yellow", borderwidth=0,
-                              width=15, font=titleFont, anchor='e').place(relx=0.04+0.25, rely=0.5)
-    # creating select box
-    strem = ttk.Combobox(listbox, width=30)
-    strem['values'] = ('CSE', 'ECE', 'IT', 'Maths')
+                           width=15, font=titleFont, anchor='e').place(relx=0.04+0.25, rely=0.5)
+    #creating select box
+    strem = ttk.Combobox(listbox,width=30)
+    strem['values']=('CSE','ECE','IT','Maths')
     strem.current(0)
     strem.bind("<<ComboboxSelected>>", dropdown_fun)
     strem.place(relx=0.22+0.25, rely=0.4)
-
-    catogery = ttk.Combobox(listbox, width=30)
-    catogery['values'] = dic['CSE']
+    catogery = ttk.Combobox(listbox,width=30)
+    catogery['values']=dic['CSE']
     catogery.place(relx=0.22+0.25, rely=0.5)
     catogery.current(1)
 
-    submit_btn = Button(listbox, text="SUBMIT", bd=5, bg='green',
-                        fg='white', font='BOLD', cursor='hand2', command="")
-    submit_btn.place(relx=0.425, rely=0.65, relwidth=0.15, relheight=0.1)
+    submit_btn = Button(listbox,text="SUBMIT",bd=5, bg='green', fg='white', font='BOLD', cursor='hand2', command="")
+    submit_btn.place(relx=0.425,rely=0.65,relwidth=0.15,relheight=0.1)
+
 
 
 def reuqests():
-    for widget in leftF.winfo_children():
+    for widget in bottomF.winfo_children():
         widget.destroy()
 
     numOfRequest = 20
 
-    # start
-    #listbox = Listbox(leftF, bg="yellow", relief="sunken",font=("courier",15),fg="white")
-    listbox = Listbox(leftF, relief="sunken", font=("courier", 15), fg="white")
-    listbox.place(relx=0.5, rely=0.5, relwidth=0.92,
-                  relheight=0.9, anchor=CENTER)
-    h = Scrollbar(leftF, orient='horizontal')
-    # h.pack(side=BOTTOM, fill=X)
-    h.place(relx=0.5, rely=1, anchor=S, relwidth=0.92)
-    v = Scrollbar(leftF, orient='vertical')
-    # v.pack(side=RIGHT, fill=Y)
-    v.place(relx=1, rely=0.5, anchor=E, relheight=0.92)
+    #start
+    listbox = Listbox(bottomF, relief="sunken", font=("courier", 15),fg="white")
+    listbox.place(relx=0.5, rely=0.43,relwidth=0.92,relheight=0.85, anchor=CENTER)
+    h = Scrollbar(bottomF, orient='horizontal')
+    h.place(relx=0.5, rely=0.9, anchor=S, relwidth=0.92)
+    v = Scrollbar(bottomF, orient='vertical')
+    v.pack(side=RIGHT, fill=Y)
+    v.place(relx=0.98, rely=0.43, anchor=E, relheight=0.92)
     t = Text(listbox, wrap=NONE, xscrollcommand=h.set, yscrollcommand=v.set)
-    # end
+    #end
     for i in range(numOfRequest):
         bookNameFont = tkFont.Font(family='product sans', size=13)
-        bookName = tkinter.Label(listbox, text='Requested_Book_Name',
-                                 bg="red", width=60, borderwidth=0, font=bookNameFont, anchor='w')
-        t.window_create(END, window=bookName)
+        bookName = tkinter.Label(listbox,text='Requested_Book_Name : ' + str(i), bg="pink",width=60, borderwidth=0,font=bookNameFont, anchor='w')
+        t.window_create(END,window=bookName)
 
         dateFont = tkFont.Font(family='product sans', size=13)
-        date = tkinter.Label(listbox, text='issue_date', bg="blue",
-                             width=18, borderwidth=0, font=dateFont, anchor='c')
-        t.window_create(END, window=date)
+        date = tkinter.Label(listbox, text='issueDate_returnDate', bg="blue", width=40, borderwidth=0, font=dateFont, anchor='c')
+        t.window_create(END,window=date)
 
         statusFont = tkFont.Font(family='product sans', size=13)
-        status = tkinter.Label(listbox, text='status', bg="yellow",
-                               width=13, borderwidth=0, font=statusFont, anchor='c')
-        t.window_create(END, window=status)
+        status = tkinter.Label(listbox, text='status', bg="light yellow", fg='black',width=13, borderwidth=0, font=statusFont, anchor='c') 
+        t.window_create(END,window=status)
 
-        buttonsFont = tkFont.Font(family='product sans', size=11)
-        cancel = tkinter.Button(listbox, text="Cancel/Return early", font=buttonsFont,
-                                bg="#F4B400", activebackground="#FFD666", anchor='c', width=16, relief="flat")
-        t.window_create(END, window=cancel)
-        t.insert(END, "\n")
-    # start
-    t.configure(state="disabled")
+        buttonsFont = tkFont.Font(family='product sans', size=12)
+        cancel = tkinter.Button(listbox, text="Cancel/Return early", font=buttonsFont, bg="#F4B400", activebackground="#FFD666", anchor='c', width=16,cursor='hand2') 
+        t.window_create(END,window=cancel)
+        t.insert(END,"\n")
+    #start   
+    t.configure(state="disabled") 
     t.pack(side=TOP, fill=X)
     h.config(command=t.xview)
-    v.config(command=t.yview)
-    # end
-
+    v.config(command=t.yview)  
+    #end  
 
 def mybooks():
-    for widget in leftF.winfo_children():
+    for widget in bottomF.winfo_children():
         widget.destroy()
 
     numOfRequest = 20
 
-    # start
-    #listbox = Listbox(leftF, bg="yellow", relief="sunken",font=("courier",15),fg="white")
-    listbox = Listbox(leftF, relief="sunken", font=("courier", 15), fg="white")
-    listbox.place(relx=0.04, rely=0, relwidth=0.92, relheight=0.9)
-    h = Scrollbar(listbox, orient='horizontal')
-    h.pack(side=BOTTOM, fill=X)
-    v = Scrollbar(listbox)
+    #start
+    listbox = Listbox(bottomF, relief="sunken", font=("courier", 15),fg="white")
+    listbox.place(relx=0.5, rely=0.43,relwidth=0.92,relheight=0.85, anchor=CENTER)
+    h = Scrollbar(bottomF, orient='horizontal')
+    h.place(relx=0.5, rely=0.9, anchor=S, relwidth=0.92)
+    v = Scrollbar(bottomF, orient='vertical')
     v.pack(side=RIGHT, fill=Y)
-    t = Text(listbox, wrap=NONE, xscrollcommand=h.set, yscrollcommand=v.set)
-    # end
+    v.place(relx=0.98, rely=0.43, anchor=E, relheight=0.92)
+    t = Text(listbox, wrap=NONE, xscrollcommand=h.set, yscrollcommand=v.set)  
+    #end
     for i in range(numOfRequest):
         bookNameFont = tkFont.Font(family='product sans', size=13)
-        bookName = tkinter.Label(listbox, text='MyBook_Name', bg="green",
-                                 width=60, borderwidth=0, font=bookNameFont, anchor='w')
-        t.window_create(END, window=bookName)
+        bookName = tkinter.Label(listbox,text='Requested_Book_Name : ' + str(i), bg="green",width=60, borderwidth=0,font=bookNameFont, anchor='w')
+        t.window_create(END,window=bookName)
 
         dateFont = tkFont.Font(family='product sans', size=13)
-        date = tkinter.Label(listbox, text='issueDate_returnDate',
-                             bg="blue", width=20, borderwidth=0, font=dateFont, anchor='c')
-        t.window_create(END, window=date)
+        date = tkinter.Label(listbox, text='issueDate_returnDate', bg="blue", width=40, borderwidth=0, font=dateFont, anchor='c')
+        t.window_create(END,window=date)
 
         statusFont = tkFont.Font(family='product sans', size=13)
-        status = tkinter.Label(listbox, text='status', bg="yellow",
-                               width=13, borderwidth=0, font=statusFont, anchor='c')
-        t.window_create(END, window=status)
+        status = tkinter.Label(listbox, text='status', bg="white", width=13, borderwidth=0, font=statusFont, anchor='c') 
+        t.window_create(END,window=status)
 
         buttonsFont = tkFont.Font(family='product sans', size=12)
-        cancel = tkinter.Button(listbox, text="Cancel/Return early", font=buttonsFont,
-                                bg="#F4B400", activebackground="#FFD666", anchor='c', width=16, relief="flat")
-        t.window_create(END, window=cancel)
-        t.insert(END, "\n")
-    # start
-    t.configure(state="disabled")
+        cancel = tkinter.Button(listbox, text="Cancel/Return early", font=buttonsFont, bg="#F4B400", activebackground="#FFD666", anchor='c', width=16, cursor='hand2') 
+        t.window_create(END,window=cancel)
+        t.insert(END,"\n")
+    #start   
+    t.configure(state="disabled") 
     t.pack(side=TOP, fill=X)
     h.config(command=t.xview)
-    v.config(command=t.yview)
-    # end
-
+    v.config(command=t.yview)  
+    #end  
 
 def history():
-    for widget in leftF.winfo_children():
+    for widget in bottomF.winfo_children():
         widget.destroy()
 
     numOfRequest = 20
 
-    # start
-    #listbox = Listbox(leftF, bg="yellow", relief="sunken",font=("courier",15),fg="white")
-    listbox = Listbox(leftF, relief="sunken", font=("courier", 15), fg="white")
-    listbox.place(relx=0.04, rely=0, relwidth=0.92, relheight=0.9)
-    h = Scrollbar(listbox, orient='horizontal')
-    h.pack(side=BOTTOM, fill=X)
-    v = Scrollbar(listbox)
+    #start
+    listbox = Listbox(bottomF, relief="sunken", font=("courier", 15),fg="white")
+    listbox.place(relx=0.5, rely=0.43,relwidth=0.92,relheight=0.85, anchor=CENTER)
+    h = Scrollbar(bottomF, orient='horizontal')
+    h.place(relx=0.5, rely=0.9, anchor=S, relwidth=0.92)
+    v = Scrollbar(bottomF, orient='vertical')
     v.pack(side=RIGHT, fill=Y)
-    t = Text(listbox, wrap=NONE, xscrollcommand=h.set, yscrollcommand=v.set)
-    # end
+    v.place(relx=0.98, rely=0.43, anchor=E, relheight=0.92)
+    t = Text(listbox, wrap=NONE, xscrollcommand=h.set, yscrollcommand=v.set) 
+    #end
     for i in range(numOfRequest):
         bookNameFont = tkFont.Font(family='product sans', size=13)
-        bookName = tkinter.Label(listbox, text='approved_book_name', bg="gray",
-                                 width=60, borderwidth=0, font=bookNameFont, anchor='w')
-        t.window_create(END, window=bookName)
+        bookName = tkinter.Label(listbox,text='Requested_Book_Name : ' + str(i), bg="gray",width=60, borderwidth=0,font=bookNameFont, anchor='w')
+        t.window_create(END,window=bookName)
 
         dateFont = tkFont.Font(family='product sans', size=13)
-        date = tkinter.Label(listbox, text='rating', bg="blue",
-                             width=18, borderwidth=0, font=dateFont, anchor='w')
-        t.window_create(END, window=date)
+        date = tkinter.Label(listbox, text='rating', bg="blue", width=40, borderwidth=0, font=dateFont, anchor='w')
+        t.window_create(END,window=date)
 
         statusFont = tkFont.Font(family='product sans', size=13)
-        status = tkinter.Label(listbox, text='status', bg="yellow",
-                               width=13, borderwidth=0, font=statusFont, anchor='c')
-        t.window_create(END, window=status)
+        status = tkinter.Label(listbox, text='status', bg="yellow", width=13, borderwidth=0, font=statusFont, anchor='c') 
+        t.window_create(END,window=status)
 
         buttonsFont = tkFont.Font(family='product sans', size=12)
-        cancel = tkinter.Button(listbox, text="Cancel/Return early", font=buttonsFont,
-                                bg="#F4B400", activebackground="#FFD666", anchor='c', width=16, relief="flat")
-        t.window_create(END, window=cancel)
-        t.insert(END, "\n")
-    # start
-    t.configure(state="disabled")
+        cancel = tkinter.Button(listbox, text="Cancel/Return early", font=buttonsFont, bg="#F4B400", activebackground="#FFD666", anchor='c', width=16, cursor='hand2') 
+        t.window_create(END,window=cancel)
+        t.insert(END,"\n")
+    #start   
+    t.configure(state="disabled") 
     t.pack(side=TOP, fill=X)
     h.config(command=t.xview)
-    v.config(command=t.yview)
-    # end
-
+    v.config(command=t.yview)  
+    #end  
 
 def fine():
-    for widget in leftF.winfo_children():
+    for widget in bottomF.winfo_children():
         widget.destroy()
 
     numOfRequest = 20
 
-    # start
-    #listbox = Listbox(leftF, bg="yellow", relief="sunken",font=("courier",15),fg="white")
-    listbox = Listbox(leftF, relief="sunken", font=("courier", 15), fg="white")
-    listbox.place(relx=0.04, rely=0, relwidth=0.92, relheight=0.9)
-    h = Scrollbar(listbox, orient='horizontal')
-    h.pack(side=BOTTOM, fill=X)
-    v = Scrollbar(listbox)
+    #start
+    listbox = Listbox(bottomF, relief="sunken", font=("courier", 15),fg="white")
+    listbox.place(relx=0.5, rely=0.43,relwidth=0.92,relheight=0.85, anchor=CENTER)
+    h = Scrollbar(bottomF, orient='horizontal')
+    h.place(relx=0.5, rely=0.9, anchor=S, relwidth=0.92)
+    v = Scrollbar(bottomF, orient='vertical')
     v.pack(side=RIGHT, fill=Y)
-    t = Text(listbox, wrap=NONE, xscrollcommand=h.set, yscrollcommand=v.set)
-    # end
+    v.place(relx=0.98, rely=0.43, anchor=E, relheight=0.92)
+    t = Text(listbox, wrap=NONE, xscrollcommand=h.set, yscrollcommand=v.set) 
+    #end
     for i in range(numOfRequest):
         bookNameFont = tkFont.Font(family='product sans', size=13)
-        bookName = tkinter.Label(listbox, text='approved_book_name', bg="black",
-                                 fg="white", width=40, borderwidth=0, font=bookNameFont, anchor='w')
-        t.window_create(END, window=bookName)
+        bookName = tkinter.Label(listbox,text='Requested_Book_Name : ' + str(i), bg="black", fg="white", width=60, borderwidth=0,font=bookNameFont, anchor='w')
+        t.window_create(END,window=bookName)
 
         dateFont = tkFont.Font(family='product sans', size=13)
-        date = tkinter.Label(listbox, text='issue_date', bg="blue",
-                             width=18, borderwidth=0, font=dateFont, anchor='c')
-        t.window_create(END, window=date)
+        date = tkinter.Label(listbox, text='issue_date', bg="blue", width=40, borderwidth=0, font=dateFont, anchor='c')
+        t.window_create(END,window=date)
 
         statusFont = tkFont.Font(family='product sans', size=13)
-        status = tkinter.Label(listbox, text='fine', bg="red",
-                               width=13, borderwidth=0, font=statusFont, anchor='c')
-        t.window_create(END, window=status)
+        status = tkinter.Label(listbox, text='fine', bg="red", width=13, borderwidth=0, font=statusFont, anchor='c') 
+        t.window_create(END,window=status)
 
         buttonsFont = tkFont.Font(family='product sans', size=12)
-        cancel = tkinter.Button(listbox, text="Cancel/Return early", font=buttonsFont,
-                                bg="#F4B400", activebackground="#FFD666", anchor='c', width=16, relief="flat")
-        t.window_create(END, window=cancel)
-        t.insert(END, "\n")
-    # start
-    t.configure(state="disabled")
+        cancel = tkinter.Button(listbox, text="Cancel/Return early", font=buttonsFont, bg="#F4B400", activebackground="#FFD666", anchor='c', width=16, cursor='hand2') 
+        t.window_create(END,window=cancel)
+        t.insert(END,"\n")
+    #start   
+    t.configure(state="disabled") 
     t.pack(side=TOP, fill=X)
     h.config(command=t.xview)
-    v.config(command=t.yview)
-    # end
+    v.config(command=t.yview)  
+    #end  
+
 
 
 def tabs():
     # Functional buttons ----------------------------------------------
-
     btFont = tkFont.Font(family='product sans', size=15, weight=tkFont.BOLD)
-    library_bt = tkinter.Button(tabF, highlightthickness=0, justify="center", activebackground='#356AC3', activeforeground="white", bd=2, cursor='hand2',
-                                text='Search Book', width=10, foreground='white', background='#4285F4', font=btFont, command=search).place(relx=0.01923076, rely=0.1)
+    library_bt = tkinter.Button(tabF,highlightthickness=0, justify="center", activebackground='#356AC3', activeforeground="white", bd=2, cursor='hand2',
+                                text='Search Book', width=10, foreground='white', background='#4285F4', font=btFont, command=library).place(relx=0.01923076, rely=0.1)
 
     fines_bt = tkinter.Button(tabF, justify="center", activebackground='#356AC3', activeforeground="white", cursor='hand2',
-                              text='Fines', width=10, foreground='white', background='#4285F4', font=btFont, command=fine).place(relx=0.21153846, rely=0.1)
+                              text='Fines', width=10, foreground='white', background='#4285F4', font=btFont,command=fine).place(relx=0.21153846, rely=0.1)
 
     history_bt = tkinter.Button(tabF, justify="center", activebackground='#356AC3', activeforeground="white", bd=2, cursor='hand2',
-                                text='History', width=10, foreground='white', background='#4285F4', font=btFont, command=history).place(relx=0.40384615, rely=0.1)
+                                text='History', width=10, foreground='white', background='#4285F4', font=btFont,command=history).place(relx=0.40384615, rely=0.1)
 
     request_bt = tkinter.Button(tabF, justify="center", activebackground='#356AC3', activeforeground="white", bd=2, cursor='hand2',
                                 text='Requests', width=10, foreground='white', background='#4285F4', font=btFont, command=reuqests).place(relx=0.59615384, rely=0.1)
 
     mybooks_bt = tkinter.Button(tabF, justify="center", activebackground='#356AC3', activeforeground="white", bd=2, cursor='hand2',
-                                text='My Books', width=10, foreground='white', background='#4285F4', font=btFont, command=mybooks).place(relx=0.78846153, rely=0.1)
+                                text='My Books', width=10, foreground='white', background='#4285F4', font=btFont,command=mybooks).place(relx=0.78846153, rely=0.1)
 
 
 tabs()
-search()
+library()
 
 # -----------------------------------------------------------
 # def convertToBinaryData(filename):
