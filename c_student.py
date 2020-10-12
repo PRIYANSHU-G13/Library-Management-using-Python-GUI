@@ -1,4 +1,5 @@
 from io import BytesIO
+from re import search
 import tkinter
 from tkinter import font as tkFont
 from tkinter.font import families
@@ -6,8 +7,10 @@ from PIL import ImageTk, Image
 import os
 from tkinter import messagebox
 from tkinter import ttk
+
 from tkinter.ttk import *
 import tkinter.font as font
+
 from tkinter import *
 import mysql.connector
 
@@ -95,7 +98,6 @@ def library():
     strem.current(0)
     strem.bind("<<ComboboxSelected>>", dropdown_fun)
     strem.place(relx=0.22+0.25, rely=0.4)
-
     catogery = ttk.Combobox(listbox,width=30)
     catogery['values']=dic['CSE']
     catogery.place(relx=0.22+0.25, rely=0.5)
