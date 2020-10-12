@@ -6,15 +6,8 @@ from PIL import ImageTk, Image
 import os
 from tkinter import messagebox
 from tkinter import ttk
-#from tkinter import *
 from tkinter.ttk import *
-#from tkinter import *
-#from tkinter.ttk import *
 import tkinter.font as font
-#from PIL import ImageTk, Image
-#from tkinter import *
-#from tkinter.ttk import *
-#from PIL import Image
 from tkinter import *
 import mysql.connector
 
@@ -33,32 +26,34 @@ win.resizable(False, False)
 topF = tkinter.Frame(win, width=1150, borderwidth=-1, height=150, bg='black')
 topF.grid(column=0, row=0, columnspan=2)
 
-leftF = tkinter.Frame(win, width=850,
-                      relief=SUNKEN, height=450, bg="gray")
-leftF.grid(column=0, row=2)
+bottomF = tkinter.Frame(win, width=1150,
+                      relief=SUNKEN, height=450, bg="yellow")
+bottomF.grid(column=0, row=2)
 
-rightF = tkinter.Frame(win, borderwidth=1, relief=SUNKEN,
-                       width=300, height=450, bg="pink")
-rightF.grid(column=1, row=2, rowspan=1)
+#rightF = tkinter.Frame(win, borderwidth=1, relief=SUNKEN,width=300, height=450, bg="pink")
+#rightF.grid(column=1, row=2, rowspan=1)
 
-tabF = tkinter.Frame(win, width=850, height=80, relief=SUNKEN, bg="gray")
-tabF.grid(column=0, row=1)
+tabF = tkinter.Frame(win, width=1150, height=80, relief=SUNKEN, bg="red")
+tabF.grid(column=0, row=1,columnspan=2)
 
-finesF = tkinter.Frame(win, borderwidth=1, relief=SUNKEN,
-                       width=300, height=80, bg="white")
-finesF.grid(column=1, row=1, rowspan=1)
+#finesF = tkinter.Frame(win, borderwidth=1, relief=SUNKEN, width=300, height=80, bg="white")
+#finesF.grid(column=1, row=1, rowspan=1)
 
 #start of Fine frame
 def message():
     messagebox.showinfo("Sorry, This option is not available!","Kindly contact to your Admin")
 
+listbox1 = Listbox(topF,relief="sunken",font=("courier",15),bg='black')
+listbox1.place(relx=0.8, rely=0,relwidth=1,relheight=1)
+
 fineFont = tkFont.Font(family='product sans',size=12)
-user = tkinter.Label(finesF, text='User : Shivam kumar', fg="green", bg="white", font=fineFont)   
+user = tkinter.Label(listbox1, text='User : Shivam kumar', fg="green", font=fineFont)   
 user.place(relx=0, rely=0)
-Fine = tkinter.Label(finesF, text='Fine  : 325.50', bg="white", fg="red", font=fineFont)   
-Fine.place(relx=0, rely=0.33)
-pay_fine=Button(finesF,text='Pay Fine',bg='green',fg='white', activeforeground='black', command=message, bd='3',cursor='hand2',font=fineFont)
-pay_fine.place(relx=0.7, rely=0.5)
+Fine = tkinter.Label(listbox1, text='Fine  : 325.50', fg="red", font=fineFont)   
+Fine.place(relx=0, rely=0.25)
+pay_fine=Button(listbox1,text='Pay Fine',bg='green',fg='white', activeforeground='black', command=message, bd='3',cursor='hand2',font=fineFont)
+pay_fine.place(relx=0.125, rely=0.23)
+
 #end of Fine frame
 
 # Library --------------------------------------------------------------------------------------------------------------
@@ -78,12 +73,12 @@ def library():
         catogery.current(0)
             
     # Entry labels ----------------------------------------------
-    for widget in leftF.winfo_children():
+    for widget in bottomF.winfo_children():
         widget.destroy()
 
         
 
-    listbox = Listbox(leftF,relief="sunken",font=("courier",15),fg="white",bg='light yellow')
+    listbox = Listbox(bottomF,relief="sunken",font=("courier",15),fg="white",bg='light yellow')
     listbox.place(relx=0.04, rely=0,relwidth=0.92,relheight=0.9)
 
     label3 = tkinter.Label(listbox,text="SEARCH BOOK",bg='#525b59', fg='white', font='BOLD')
@@ -112,28 +107,28 @@ def library():
 
 
 def reuqests():
-    for widget in leftF.winfo_children():
+    for widget in bottomF.winfo_children():
         widget.destroy()
 
     numOfRequest = 20
 
     #start
-    listbox = Listbox(leftF, relief="sunken", font=("courier", 15),fg="white")
+    listbox = Listbox(bottomF, relief="sunken", font=("courier", 15),fg="white")
     listbox.place(relx=0.5, rely=0.43,relwidth=0.92,relheight=0.85, anchor=CENTER)
-    h = Scrollbar(leftF, orient='horizontal')
-    h.place(relx=0.5, rely=0.92, anchor=S, relwidth=0.92)
-    v = Scrollbar(leftF, orient='vertical')
+    h = Scrollbar(bottomF, orient='horizontal')
+    h.place(relx=0.5, rely=0.9, anchor=S, relwidth=0.92)
+    v = Scrollbar(bottomF, orient='vertical')
     v.pack(side=RIGHT, fill=Y)
-    v.place(relx=1, rely=0.43, anchor=E, relheight=0.92)
+    v.place(relx=0.98, rely=0.43, anchor=E, relheight=0.92)
     t = Text(listbox, wrap=NONE, xscrollcommand=h.set, yscrollcommand=v.set)
     #end
     for i in range(numOfRequest):
         bookNameFont = tkFont.Font(family='product sans', size=13)
-        bookName = tkinter.Label(listbox,text='Requested_Book_Name', bg="pink",width=60, borderwidth=0,font=bookNameFont, anchor='w')
+        bookName = tkinter.Label(listbox,text='Requested_Book_Name : ' + str(i), bg="pink",width=60, borderwidth=0,font=bookNameFont, anchor='w')
         t.window_create(END,window=bookName)
 
         dateFont = tkFont.Font(family='product sans', size=13)
-        date = tkinter.Label(listbox, text='issueDate_returnDate', bg="blue", width=20, borderwidth=0, font=dateFont, anchor='c')
+        date = tkinter.Label(listbox, text='issueDate_returnDate', bg="blue", width=40, borderwidth=0, font=dateFont, anchor='c')
         t.window_create(END,window=date)
 
         statusFont = tkFont.Font(family='product sans', size=13)
@@ -152,28 +147,28 @@ def reuqests():
     #end  
 
 def mybooks():
-    for widget in leftF.winfo_children():
+    for widget in bottomF.winfo_children():
         widget.destroy()
 
     numOfRequest = 20
 
     #start
-    listbox = Listbox(leftF, relief="sunken", font=("courier", 15), fg="white")
+    listbox = Listbox(bottomF, relief="sunken", font=("courier", 15),fg="white")
     listbox.place(relx=0.5, rely=0.43,relwidth=0.92,relheight=0.85, anchor=CENTER)
-    h = Scrollbar(leftF, orient='horizontal')
-    h.place(relx=0.5, rely=0.92, anchor=S, relwidth=0.92)
-    v = Scrollbar(leftF, orient='vertical')
+    h = Scrollbar(bottomF, orient='horizontal')
+    h.place(relx=0.5, rely=0.9, anchor=S, relwidth=0.92)
+    v = Scrollbar(bottomF, orient='vertical')
     v.pack(side=RIGHT, fill=Y)
-    v.place(relx=1, rely=0.43, anchor=E, relheight=0.92)
+    v.place(relx=0.98, rely=0.43, anchor=E, relheight=0.92)
     t = Text(listbox, wrap=NONE, xscrollcommand=h.set, yscrollcommand=v.set)  
     #end
     for i in range(numOfRequest):
         bookNameFont = tkFont.Font(family='product sans', size=13)
-        bookName = tkinter.Label(listbox,text='MyBook_Name', bg="green",width=60, borderwidth=0,font=bookNameFont, anchor='w')
+        bookName = tkinter.Label(listbox,text='Requested_Book_Name : ' + str(i), bg="green",width=60, borderwidth=0,font=bookNameFont, anchor='w')
         t.window_create(END,window=bookName)
 
         dateFont = tkFont.Font(family='product sans', size=13)
-        date = tkinter.Label(listbox, text='issueDate_returnDate', bg="blue", width=20, borderwidth=0, font=dateFont, anchor='c')
+        date = tkinter.Label(listbox, text='issueDate_returnDate', bg="blue", width=40, borderwidth=0, font=dateFont, anchor='c')
         t.window_create(END,window=date)
 
         statusFont = tkFont.Font(family='product sans', size=13)
@@ -192,28 +187,28 @@ def mybooks():
     #end  
 
 def history():
-    for widget in leftF.winfo_children():
+    for widget in bottomF.winfo_children():
         widget.destroy()
 
     numOfRequest = 20
 
     #start
-    listbox = Listbox(leftF, relief="sunken", font=("courier", 15), fg="white")
+    listbox = Listbox(bottomF, relief="sunken", font=("courier", 15),fg="white")
     listbox.place(relx=0.5, rely=0.43,relwidth=0.92,relheight=0.85, anchor=CENTER)
-    h = Scrollbar(leftF, orient='horizontal')
-    h.place(relx=0.5, rely=0.92, anchor=S, relwidth=0.92)
-    v = Scrollbar(leftF, orient='vertical')
+    h = Scrollbar(bottomF, orient='horizontal')
+    h.place(relx=0.5, rely=0.9, anchor=S, relwidth=0.92)
+    v = Scrollbar(bottomF, orient='vertical')
     v.pack(side=RIGHT, fill=Y)
-    v.place(relx=1, rely=0.43, anchor=E, relheight=0.92)
-    t = Text(listbox, wrap=NONE, xscrollcommand=h.set, yscrollcommand=v.set)  
+    v.place(relx=0.98, rely=0.43, anchor=E, relheight=0.92)
+    t = Text(listbox, wrap=NONE, xscrollcommand=h.set, yscrollcommand=v.set) 
     #end
     for i in range(numOfRequest):
         bookNameFont = tkFont.Font(family='product sans', size=13)
-        bookName = tkinter.Label(listbox,text='approved_book_name', bg="gray",width=60, borderwidth=0,font=bookNameFont, anchor='w')
+        bookName = tkinter.Label(listbox,text='Requested_Book_Name : ' + str(i), bg="gray",width=60, borderwidth=0,font=bookNameFont, anchor='w')
         t.window_create(END,window=bookName)
 
         dateFont = tkFont.Font(family='product sans', size=13)
-        date = tkinter.Label(listbox, text='rating', bg="blue", width=18, borderwidth=0, font=dateFont, anchor='w')
+        date = tkinter.Label(listbox, text='rating', bg="blue", width=40, borderwidth=0, font=dateFont, anchor='w')
         t.window_create(END,window=date)
 
         statusFont = tkFont.Font(family='product sans', size=13)
@@ -232,28 +227,28 @@ def history():
     #end  
 
 def fine():
-    for widget in leftF.winfo_children():
+    for widget in bottomF.winfo_children():
         widget.destroy()
 
     numOfRequest = 20
 
     #start
-    listbox = Listbox(leftF, relief="sunken", font=("courier", 15), fg="white")
+    listbox = Listbox(bottomF, relief="sunken", font=("courier", 15),fg="white")
     listbox.place(relx=0.5, rely=0.43,relwidth=0.92,relheight=0.85, anchor=CENTER)
-    h = Scrollbar(leftF, orient='horizontal')
-    h.place(relx=0.5, rely=0.92, anchor=S, relwidth=0.92)
-    v = Scrollbar(leftF, orient='vertical')
+    h = Scrollbar(bottomF, orient='horizontal')
+    h.place(relx=0.5, rely=0.9, anchor=S, relwidth=0.92)
+    v = Scrollbar(bottomF, orient='vertical')
     v.pack(side=RIGHT, fill=Y)
-    v.place(relx=1, rely=0.43, anchor=E, relheight=0.92)
+    v.place(relx=0.98, rely=0.43, anchor=E, relheight=0.92)
     t = Text(listbox, wrap=NONE, xscrollcommand=h.set, yscrollcommand=v.set) 
     #end
     for i in range(numOfRequest):
         bookNameFont = tkFont.Font(family='product sans', size=13)
-        bookName = tkinter.Label(listbox,text='approved_book_name', bg="black", fg="white", width=40, borderwidth=0,font=bookNameFont, anchor='w')
+        bookName = tkinter.Label(listbox,text='Requested_Book_Name : ' + str(i), bg="black", fg="white", width=60, borderwidth=0,font=bookNameFont, anchor='w')
         t.window_create(END,window=bookName)
 
         dateFont = tkFont.Font(family='product sans', size=13)
-        date = tkinter.Label(listbox, text='issue_date', bg="blue", width=18, borderwidth=0, font=dateFont, anchor='c')
+        date = tkinter.Label(listbox, text='issue_date', bg="blue", width=40, borderwidth=0, font=dateFont, anchor='c')
         t.window_create(END,window=date)
 
         statusFont = tkFont.Font(family='product sans', size=13)
