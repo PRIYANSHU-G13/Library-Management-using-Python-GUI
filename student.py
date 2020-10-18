@@ -38,13 +38,13 @@ def start_student(reg,password):
     # Making the window -------------------------------------
     win = Tk()
     win.title(str("Hii, "+user_details[0][0])+"  |   Welcome to IIIT Kottayam Library")
-    win.geometry('1150x680')
+    win.geometry('1150x630+50+5')
     win.config(bg='White')
     win.resizable(False, False)
 
 
 # Frames ----------------------------------------------------------------------------------------------------
-
+    '''
     topF = tkinter.Frame(win, width=1150, borderwidth=-1, height=150, bg='black')
     topF.grid(column=0, row=0, columnspan=2)
 
@@ -53,7 +53,18 @@ def start_student(reg,password):
 
     tabF = tkinter.Frame(win, width=1150, height=80, relief=SUNKEN, bg="red")
     tabF.grid(column=0, row=1,columnspan=2)
+    '''
+    #start
+    topF = tkinter.Frame(win, borderwidth=-1, bg='black')
+    topF.place(relx=0, rely=0, relwidth=1, relheight=0.2206)
 
+    tabF = tkinter.Frame(win, relief=SUNKEN, bg="red")
+    tabF.place(relx=0, rely=0.2206, relwidth=1, relheight=0.1176)
+
+    bottomF = tkinter.Frame(win, relief=SUNKEN, bg="yellow")
+    bottomF.place(relx=0, rely=0.2206+0.1176, relwidth=1, relheight=1-0.2206-0.1176)
+    #end
+    
     #start of Fine
     #creting listbox1 to insert fine into this listbox
     listbox1 = Listbox(topF,relief="sunken",font=("courier",15),bg='black')
