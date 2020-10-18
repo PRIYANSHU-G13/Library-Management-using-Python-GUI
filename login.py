@@ -15,14 +15,14 @@ from tkinter import *
 from tkinter.ttk import *
 from PIL import Image
 import mysql.connector
-from admin import *
+from admin_updated import *
 from c_student import *
 
 
 
 win = Tk()
 win.title('Library Management System   |   Welcome to IIIT Kottayam Library')
-win.geometry('1150x680')
+win.geometry('1150x630+50+5') #here 1150 is width, 630 is height, 50 is x-cordinate, 5 is y-cordinate
 win.config(bg='White')
 win.resizable(False, False)
 
@@ -58,7 +58,7 @@ def search_user():
           back()
         else:          
             if len(admin)>0:
-                messagebox.showinfo('sucess','Login Success as Admin')
+                #messagebox.showinfo('sucess','Login Success as Admin')
                 cur.close()
                 con.close()
                 found=True
