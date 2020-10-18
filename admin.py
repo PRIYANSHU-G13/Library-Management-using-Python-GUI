@@ -689,4 +689,4 @@ def start_admin(user,password):
     admin.mainloop()
 
 if __name__ == "__main__":
-    start_admin('2019bcs0035','priyanshu@2019')
+    start_admin('admin_user','admin_password') #change admin_user and admin_passowrd by adding a new admin in admin table.Or use the one which already exists in the table.
