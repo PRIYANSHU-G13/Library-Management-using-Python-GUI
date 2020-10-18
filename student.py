@@ -1,4 +1,4 @@
-#...
+#this code will be used as module to import into login.py file so, here variables have been declared as global
 from io import BytesIO
 import tkinter
 from tkinter import font as tkFont
@@ -12,54 +12,75 @@ import tkinter.font as font
 from tkinter import *
 import mysql.connector
 
+#conneting MySQL
+con = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="XXXX",#Replace XXXX with your MySQL password
+    database="Library")
+cur = con.cursor()
 
-# Making the window -------------------------------------
-win = Tk()
-win.title('Welcome [Username_here]')
-win.geometry('1150x680')
-win.config(bg='White')
-win.resizable(False, False)
+Regno=""
+
+def start_student(reg,password): 
+    global cur,Regno,win,topF,bottomF,tabF
+    #initialize Regno of the student to argument passed from module login.py into start() function after login 
+    Regno=reg
+    
+    #start
+    #fetching data of user after login
+    command="select Sname, Fine from student where Regno=%s and Password=%s"
+    var=[reg, password]
+    cur.execute(command,var)
+    user_details=cur.fetchall()
+    #end
+
+    # Making the window -------------------------------------
+    win = Tk()
+    win.title(str("Hii, "+user_details[0][0])+"  |   Welcome to IIIT Kottayam Library")
+    win.geometry('1150x680')
+    win.config(bg='White')
+    win.resizable(False, False)
 
 
 # Frames ----------------------------------------------------------------------------------------------------
-# global topF, leftF, rightF
 
-topF = tkinter.Frame(win, width=1150, borderwidth=-1, height=150, bg='black')
-topF.grid(column=0, row=0, columnspan=2)
+    topF = tkinter.Frame(win, width=1150, borderwidth=-1, height=150, bg='black')
+    topF.grid(column=0, row=0, columnspan=2)
 
-bottomF = tkinter.Frame(win, width=1150,
-                      relief=SUNKEN, height=450, bg="yellow")
-bottomF.grid(column=0, row=2)
+    bottomF = tkinter.Frame(win, width=1150, relief=SUNKEN, height=450, bg="yellow")
+    bottomF.grid(column=0, row=2)
 
-#rightF = tkinter.Frame(win, borderwidth=1, relief=SUNKEN,width=300, height=450, bg="pink")
-#rightF.grid(column=1, row=2, rowspan=1)
+    tabF = tkinter.Frame(win, width=1150, height=80, relief=SUNKEN, bg="red")
+    tabF.grid(column=0, row=1,columnspan=2)
 
-tabF = tkinter.Frame(win, width=1150, height=80, relief=SUNKEN, bg="red")
-tabF.grid(column=0, row=1,columnspan=2)
+    #start of Fine
+    #creting listbox1 to insert fine into this listbox
+    listbox1 = Listbox(topF,relief="sunken",font=("courier",15),bg='black')
+    listbox1.place(relx=0.8, rely=0,relwidth=1,relheight=1)
 
-#finesF = tkinter.Frame(win, borderwidth=1, relief=SUNKEN, width=300, height=80, bg="white")
-#finesF.grid(column=1, row=1, rowspan=1)
+    fineFont = tkFont.Font(size=12)
+    user = tkinter.Label(listbox1, text='User : ' + str(user_details[0][0]), fg="green", font=fineFont)   
+    user.place(relx=0, rely=0)
+    Fine = tkinter.Label(listbox1, text='Fine  : ' + str(user_details[0][1]), fg="red", font=fineFont)   
+    Fine.place(relx=0, rely=0.25)
+    pay_fine=Button(listbox1,text='Pay Fine',bg='green',fg='white', activeforeground='black', command="", bd='3',cursor='hand2', font=fineFont)
+    pay_fine.place(relx=0.125, rely=0.23)
+    
+    #end of Fine    
+    #calling tab() function from start() function to display tabs
+    tabs()
+    win.mainloop()
+#end  of start() function
 
-#start of Fine frame
+#function to display message of PayFine button
 def message():
-    messagebox.showinfo("Sorry, This option is not available!","Kindly contact to your Admin")
-
-listbox1 = Listbox(topF,relief="sunken",font=("courier",15),bg='black')
-listbox1.place(relx=0.8, rely=0,relwidth=1,relheight=1)
-
-fineFont = tkFont.Font(family='product sans',size=12)
-user = tkinter.Label(listbox1, text='User : Shivam kumar', fg="green", font=fineFont)   
-user.place(relx=0, rely=0)
-Fine = tkinter.Label(listbox1, text='Fine  : 325.50', fg="red", font=fineFont)   
-Fine.place(relx=0, rely=0.25)
-pay_fine=Button(listbox1,text='Pay Fine',bg='green',fg='white', activeforeground='black', command=message, bd='3',cursor='hand2',font=fineFont)
-pay_fine.place(relx=0.125, rely=0.23)
-
-#end of Fine frame
+    print("Sorry, This option is not available!\n","Kindly contact to your Admin")
 
 # Library --------------------------------------------------------------------------------------------------------------
 
 def library():
+    global cur,win,topF,bottomF,tabF
     dic={
         'CSE':['DS','Algorithms','AI','ML','DL','NNP'],
         'ECE':['Basic electronics','Digital electronics'],
@@ -68,7 +89,7 @@ def library():
         }
     def dropdown_fun(event):
         #if strem.get()=="CSE":
-        catogery = ttk.Combobox(listbox,width=30)
+        catogery = ttk.Combobox(listbox,width=30,state="readonly")
         catogery['values'] = dic[strem.get()]
         catogery.place(relx=0.22+0.25, rely=0.5)
         catogery.current(0)
@@ -91,7 +112,7 @@ def library():
     catogery1 = tkinter.Label(listbox, text='Select catogery : ', bg="light yellow", borderwidth=0,
                            width=15, font=titleFont, anchor='e').place(relx=0.04+0.25, rely=0.5)
     #creating select box
-    strem = ttk.Combobox(listbox,width=30)
+    strem = ttk.Combobox(listbox,width=30,state="readonly")
     strem['values']=('CSE','ECE','IT','Maths')
     strem.current(0)
     strem.bind("<<ComboboxSelected>>", dropdown_fun)
@@ -108,6 +129,7 @@ def library():
 
 
 def reuqests():
+    global cur,win,topF,bottomF,tabF
     for widget in bottomF.winfo_children():
         widget.destroy()
 
@@ -148,12 +170,14 @@ def reuqests():
     #end  
 
 def mybooks():
+    global cur,win,topF,bottomF,tabF
     for widget in bottomF.winfo_children():
         widget.destroy()
 
     numOfRequest = 20
 
     #start
+    #command='select '
     listbox = Listbox(bottomF, relief="sunken", font=("courier", 15),fg="white")
     listbox.place(relx=0.5, rely=0.43,relwidth=0.92,relheight=0.85, anchor=CENTER)
     h = Scrollbar(bottomF, orient='horizontal')
@@ -188,6 +212,7 @@ def mybooks():
     #end  
 
 def history():
+    global Regno,cur,win,topF,bottomF,tabF
     for widget in bottomF.winfo_children():
         widget.destroy()
 
@@ -203,22 +228,76 @@ def history():
     v.place(relx=0.98, rely=0.43, anchor=E, relheight=0.92)
     t = Text(listbox, wrap=NONE, xscrollcommand=h.set, yscrollcommand=v.set) 
     #end
-    for i in range(numOfRequest):
-        bookNameFont = tkFont.Font(family='product sans', size=13)
-        bookName = tkinter.Label(listbox,text='Requested_Book_Name : ' + str(i), bg="gray",width=60, borderwidth=0,font=bookNameFont, anchor='w')
+    command='select DISTINCT Book.Bname,Book.Author,Return_book.Approved_date,Return_book.Return_date,Book.Bid,SubBook.Sub_bid,Return_book.Borrow_ID from Book,Student,SubBook,Return_book WHERE Book.Bid=SubBook.Bid and SubBook.Sub_bid=Return_book.Sub_bid and Return_book.Student_regno=%s'
+    var=[Regno]
+    cur.execute(command,var)
+    rows=cur.fetchall()
+
+    bookNameFont = tkFont.Font(family='product sans', size=13)
+    bookName = tkinter.Label(listbox,text='Book Name', bg="pink",width=40, borderwidth=0,font=bookNameFont, anchor='c')
+    t.window_create(END,window=bookName)
+
+    authorFont = tkFont.Font(family='product sans', size=13)
+    author = tkinter.Label(listbox, text='Author', bg="pink", width=40, borderwidth=0, font=authorFont, anchor='c')
+    t.window_create(END,window=author)
+
+    approveddateFont = tkFont.Font(family='product sans', size=13)
+    approveddate = tkinter.Label(listbox, text='Approved Date', bg="pink", width=13, borderwidth=0, font=approveddateFont, anchor='c') 
+    t.window_create(END,window=approveddate)
+
+    returndateFont = tkFont.Font(family='product sans', size=13)
+    returndate = tkinter.Label(listbox, text='Return date', bg="pink", width=13, borderwidth=0, font=returndateFont, anchor='c') 
+    t.window_create(END,window=returndate)
+
+    bidFont = tkFont.Font(family='product sans', size=13)
+    bid = tkinter.Label(listbox, text='Book ID', bg="pink", width=13, borderwidth=0, font=bidFont, anchor='c') 
+    t.window_create(END,window=bid)
+
+    subbidFont = tkFont.Font(family='product sans', size=13)
+    subbid = tkinter.Label(listbox, text='Sub Book ID', bg="pink", width=13, borderwidth=0, font=subbidFont, anchor='c') 
+    t.window_create(END,window=subbid)
+
+    borrowidFont = tkFont.Font(family='product sans', size=13)
+    borrowid = tkinter.Label(listbox, text='Borrow ID', bg="pink", width=13, borderwidth=0, font=borrowidFont, anchor='c') 
+    t.window_create(END,window=borrowid)
+    t.insert(END,"\n")
+    t.insert(END,"\n")
+
+    for a in rows:
+        #bookNameFont = tkFont.Font(family='product sans', size=13)
+        bookName = tkinter.Label(listbox,text=str(a[0]), bg="gray",width=40, borderwidth=0,font=bookNameFont, anchor='w')
         t.window_create(END,window=bookName)
 
-        dateFont = tkFont.Font(family='product sans', size=13)
-        date = tkinter.Label(listbox, text='rating', bg="blue", width=40, borderwidth=0, font=dateFont, anchor='w')
-        t.window_create(END,window=date)
+        #authorFont = tkFont.Font(family='product sans', size=13)
+        author = tkinter.Label(listbox, text=str(a[1]), bg="green", width=40, borderwidth=0, font=authorFont, anchor='w')
+        t.window_create(END,window=author)
 
-        statusFont = tkFont.Font(family='product sans', size=13)
-        status = tkinter.Label(listbox, text='status', bg="yellow", width=13, borderwidth=0, font=statusFont, anchor='c') 
-        t.window_create(END,window=status)
+        #approveddateFont = tkFont.Font(family='product sans', size=13)
+        approveddate = tkinter.Label(listbox, text=str(a[2]), bg="yellow", width=13, borderwidth=0, font=approveddateFont, anchor='c') 
+        t.window_create(END,window=approveddate)
 
+        #returndateFont = tkFont.Font(family='product sans', size=13)
+        returndate = tkinter.Label(listbox, text=str(a[3]), bg="gray", width=13, borderwidth=0, font=returndateFont, anchor='c') 
+        t.window_create(END,window=returndate)
+
+        #bidFont = tkFont.Font(family='product sans', size=13)
+        bid = tkinter.Label(listbox, text=str(a[4]), bg="green", width=13, borderwidth=0, font=bidFont, anchor='c') 
+        t.window_create(END,window=bid)
+
+        #subbidFont = tkFont.Font(family='product sans', size=13)
+        subbid = tkinter.Label(listbox, text=str(a[5]), bg="yellow", width=13, borderwidth=0, font=subbidFont, anchor='c') 
+        t.window_create(END,window=subbid)
+
+        #borrowidFont = tkFont.Font(family='product sans', size=13)
+        borrowid = tkinter.Label(listbox, text=str(a[6]), bg="gray", width=13, borderwidth=0, font=borrowidFont, anchor='c') 
+        t.window_create(END,window=borrowid)
+
+        '''
         buttonsFont = tkFont.Font(family='product sans', size=12)
         cancel = tkinter.Button(listbox, text="Cancel/Return early", font=buttonsFont, bg="#F4B400", activebackground="#FFD666", anchor='c', width=16, cursor='hand2') 
         t.window_create(END,window=cancel)
+        '''
+        t.insert(END,"\n")
         t.insert(END,"\n")
     #start   
     t.configure(state="disabled") 
@@ -228,12 +307,14 @@ def history():
     #end  
 
 def fine():
+    global cur,win,topF,bottomF,tabF
     for widget in bottomF.winfo_children():
         widget.destroy()
 
     numOfRequest = 20
 
     #start
+    #command='select sub_bid,Borrow_id,((CURRENT_DATE()-Approved_date)-14)*5 as Fine from Borrow where (CURRENT_DATE()-Approved_date)>14'
     listbox = Listbox(bottomF, relief="sunken", font=("courier", 15),fg="white")
     listbox.place(relx=0.5, rely=0.43,relwidth=0.92,relheight=0.85, anchor=CENTER)
     h = Scrollbar(bottomF, orient='horizontal')
@@ -270,6 +351,7 @@ def fine():
 
 
 def tabs():
+    global cur,win,topF,bottomF,tabF
     # Functional buttons ----------------------------------------------
     btFont = tkFont.Font(family='product sans', size=15, weight=tkFont.BOLD)
     library_bt = tkinter.Button(tabF,highlightthickness=0, justify="center", activebackground='#356AC3', activeforeground="white", bd=2, cursor='hand2',
@@ -287,74 +369,24 @@ def tabs():
     mybooks_bt = tkinter.Button(tabF, justify="center", activebackground='#356AC3', activeforeground="white", bd=2, cursor='hand2',
                                 text='My Books', width=10, foreground='white', background='#4285F4', font=btFont,command=mybooks).place(relx=0.78846153, rely=0.1)
 
+    library() 
+    #win.mainloop()                           
 
-tabs()
-library()
+if __name__ == "__main__":
+    start_student('2019BCS0034','shiva') #comment out this this line if you don't want to run this program as a main program
 
-# -----------------------------------------------------------
-# def convertToBinaryData(filename):
-#     # Convert digital data to binary format
-#     with open(filename, 'rb') as file:
-#         binaryData = file.read()
-#     return binaryData
-
-
-# connector = mysql.connector.Connect(
-#     host="localhost",
-#     user="root",
-#     password="sohamsql",  # Replace XXXX with your MySQL password
-#     database="library")
-# cursor = connector.cursor()
-
-# # img = ImageTk.PhotoImage(Image.open("C:\Users\Admin\Downloads\peng.jpg"))
-# bin_file = convertToBinaryData(r"C:\Users\\Admin\\Downloads\\peng.jpg")
-# sql_insert_blob_query = """INSERT INTO testimg(img) VALUES (%s)"""
-# insert_blob_tuple = (bin_file,)
-
-# result = cursor.execute(sql_insert_blob_query, insert_blob_tuple)
-
-# connector.commit()
-
-# sql_fetch_blob_query = """SELECT * from testimg;"""
-# cursor.execute(sql_fetch_blob_query)
-
-# record = cursor.fetchone()
+    #if you directely use this code before login, it will show  a message box with "Error!, Kindly login before accessing It!" and 
+    #after clicking on the ok button the whole window will be destroyed.
+    #start
+    '''
+    win = Tk()
+    win.title('Student section')
+    win.geometry('1150x680')
+    win.config(bg='White')
+    win.resizable(False, False)
+    messagebox.showinfo("Error!, Kindly login before accessing It!")
+    win.destory()  
+    ''' 
+    #end
 
 
-# def write_file(data, filename):
-#     # Convert binary data to proper format and write it on Hard Disk
-#     with open(filename, 'wb') as file:
-#         file.write(data)
-
-
-# # for i in record:
-# file = record[0]
-# # write_file(file, r"C:\Users\\Admin\\Downloads\\peng_result.jpg")
-
-
-# img = Image.open(BytesIO(file))
-# phimg = ImageTk.PhotoImage(img)
-
-# panel = tkinter.Label(leftF, image=phimg)
-# panel.grid(row=0, rowspan=5, columnspan=2)
-# # panel = Tkinter.Label(window, image=phimg)
-# --------------------------------------------------
-
-# for i in range(5):
-#     tmpL = tkinter.Label(leftF, text="HI----this is button number : "+str(i)).grid(column=2, row=i)
-
-# for i in range(5):
-
-# soham = tkinter.Frame(leftF, width=800, relief=SUNKEN,
-#                       height=200, bg="red", borderwidth=1).grid(column=1, row=2)
-
-# book_name = tkinter.Label(leftF, text="book_name : ",
-#   bg='Yellow',  borderwidth=1).place(x=0, y=4)
-
-# place(relx=0.0, rely=0.5)
-# keywordsL = tkinter.Label(leftF, text=column_list, bg="White", width=100,
-#   borderwidth=0, font=titleFont).place(relx=0.01923076, rely=0.2+0.05+0.1-0.11)
-
-# tmp.grid(column=0, row=2)
-
-win.mainloop()
