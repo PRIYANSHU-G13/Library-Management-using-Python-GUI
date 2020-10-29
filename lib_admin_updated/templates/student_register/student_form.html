@@ -1,0 +1,66 @@
+{% extends "student_register/base.html" %} {% load crispy_forms_tags %} {% block content %}
+
+<form action="" method="POST" autocomplete="off">
+    {% csrf_token %}
+
+    <!-- {{ form|crispy}} -->
+    <!-- 12 max -->
+    <div class="row">
+        <div class="col-md-10">
+            {{form.fullname|as_crispy_field}}
+        </div>
+        <div class="col-md-10">
+            {{form.username|as_crispy_field}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            {{form.email|as_crispy_field}}
+        </div>
+        <div class="col-md-10">
+            {{form.password|as_crispy_field}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            {{form.batch|as_crispy_field}}
+        </div>
+        <div class="col-md-7">
+            {{form.regno|as_crispy_field}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            {{form.DOB|as_crispy_field}}
+        </div>
+        <div class="col-md-7">
+            {{form.mobile|as_crispy_field}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            {{form.course|as_crispy_field}}
+        </div>
+        <div class="col-md-7">
+            {{form.fine|as_crispy_field}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <button type="submit" class="btn btn-outline-success btn-block "><i class="fa fa-address-book" aria-hidden="true"></i> Save</button>
+        </div>
+        <div class="col-md-3">
+            <a href="{% url 'student_list' %}" class="btn btn-warning btn-block"> View list</a>
+        </div>
+    </div>
+
+
+
+
+
+
+
+</form>
+
+
+{% endblock content %}
